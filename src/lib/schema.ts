@@ -147,7 +147,12 @@ export function serviceNode(
     name,
     description,
     provider: { "@id": `${SITE_URL}/#organization` },
-    areaServed: "United Kingdom",
+    areaServed: [
+      "United Kingdom",
+      "United States",
+      "European Union",
+      "International",
+    ],
   };
 }
 

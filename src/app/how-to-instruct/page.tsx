@@ -9,9 +9,9 @@ import { ResponsiveTable } from "@/components/ui/ResponsiveTable";
 import { sjeVsPaeBlock, hotTubbingIntroBlock } from "@/data/shared-content";
 
 export const metadata = createMetadata({
-  title: "How to Instruct a Forensic Expert Witness UK | Step-by-Step Guide",
+  title: "How to Instruct a Forensic Expert Witness | Step-by-Step Guide",
   description:
-    "Step-by-step guide for UK solicitors on instructing the right forensic expert witness, identifying the discipline needed, credentials, SJE vs PAE, and letters of instruction.",
+    "Step-by-step guide for legal teams on instructing the right forensic expert witness: identifying the discipline, credentials, SJE vs PAE, and letters of instruction. Domestic and international disputes.",
   path: "/how-to-instruct",
 });
 
@@ -83,7 +83,7 @@ export default function HowToInstructPage() {
       />
       <PageHero
         title="How to Instruct a Forensic Expert Witness"
-        subtitle="A step-by-step guide for UK solicitors on identifying the right forensic discipline, vetting credentials, preparing letters of instruction, and managing multi-discipline expert teams."
+        subtitle="A step-by-step guide for legal teams on identifying the right forensic discipline, vetting credentials, preparing letters of instruction, and managing multi-discipline expert teams in domestic courts and international arbitration."
         breadcrumbs={[
           { label: "Home", href: "/" },
           { label: "How to Instruct" },

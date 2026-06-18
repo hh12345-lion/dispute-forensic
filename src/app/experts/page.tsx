@@ -7,9 +7,9 @@ import { breadcrumbSchema, personSchema } from "@/lib/schema";
 import { getAllExperts } from "@/data/experts";
 
 export const metadata = createMetadata({
-  title: "Our Forensic Expert Witnesses | UK Multi-Discipline Network",
+  title: "Our Forensic Expert Witnesses | Multi-Discipline Network",
   description:
-    "DisputeForensic.com connects UK solicitors with qualified forensic expert witnesses across all disciplines, accounting, engineering, digital forensics, and economics.",
+    "DisputeForensic.com connects legal teams worldwide with qualified forensic expert witnesses across accounting, engineering, digital forensics, and economics.",
   path: "/experts",
 });
 
@@ -29,7 +29,7 @@ export default function ExpertsPage() {
       />
       <PageHero
         title="Our Forensic Expert Witnesses"
-        subtitle="DisputeForensic.com connects UK solicitors and international arbitration counsel with qualified forensic expert witnesses across all four core disciplines, forensic accounting, forensic engineering and quantum, digital forensics, and forensic economics."
+        subtitle="DisputeForensic.com connects legal teams in domestic courts and international arbitration with qualified forensic expert witnesses across forensic accounting, forensic engineering and quantum, digital forensics, and forensic economics."
         breadcrumbs={[
           { label: "Home", href: "/" },
           { label: "Experts" },

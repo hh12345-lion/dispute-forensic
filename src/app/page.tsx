@@ -16,20 +16,22 @@ import {
 import { getAllDisciplines } from "@/data/disciplines";
 import { getAllServices, getServiceNames } from "@/data/services";
 import { HOMEPAGE_SEO_LINKS } from "@/lib/seo-internal-links";
+import { SITE_SCOPE } from "@/lib/site";
 
 export const metadata = createMetadata({
   title:
-    "Forensic Expert Witness UK | All Four Disciplines | DisputeForensic",
+    "Forensic Expert Witness | All Four Disciplines | DisputeForensic",
   description:
-    "Connect with forensic expert witnesses across accounting, engineering, digital forensics, and economics for UK litigation and arbitration. CPR Part 35 and IBA Rules compliant.",
+    "Connect with forensic expert witnesses across accounting, engineering, digital forensics, and economics for litigation and international arbitration worldwide.",
   path: "/",
 });
 
 const stats = [
   ["Core forensic disciplines", "4", "Accounting, engineering, digital, economics"],
-  ["Court framework (civil)", "CPR Part 35", "Civil Procedure Rules"],
-  ["Court framework (family)", "FPR Part 25", "Family Procedure Rules"],
-  ["Arbitration evidence rules", "IBA Rules Art 5/6", "International arbitration"],
+  ["Geographic coverage", "Worldwide", "Domestic courts and international arbitration"],
+  ["Court framework (civil)", "CPR Part 35", "Civil Procedure Rules (UK)"],
+  ["Court framework (family)", "FPR Part 25", "Family Procedure Rules (UK)"],
+  ["Arbitration evidence rules", "IBA Rules Art 5/6", "ICC, LCIA, ICSID, UNCITRAL"],
   ["Typical hourly rate range", "£150–£600+/hr", "Discipline-dependent"],
   ["Expert witness services", "8", "Full dispute lifecycle"],
   ["Multi-discipline matching", "Yes", "Coordinated expert teams"],
@@ -53,11 +55,14 @@ export default function HomePage() {
     <>
       <JsonLd data={homepageSchema} />
       <PageHero
-        title="Forensic Expert Witness Services for UK Solicitors & Counsel"
-        subtitle="DisputeForensic.com is the UK's multi-discipline forensic expert witness portal, connecting solicitors, barristers, and international arbitration counsel with qualified experts across forensic accounting, forensic engineering and quantum, digital forensics, and forensic economics. CPR Part 35 and IBA Rules compliant."
+        title="Forensic Expert Witness Services for Legal Teams Worldwide"
+        subtitle="DisputeForensic.com is a multi-discipline forensic expert witness portal, connecting solicitors, counsel, in-house legal teams, and international arbitration practitioners with qualified experts across forensic accounting, forensic engineering and quantum, digital forensics, and forensic economics."
       />
       <Section>
-        <div className="flex flex-col items-center gap-4 sm:flex-row sm:justify-center">
+        <p className="mx-auto max-w-3xl text-center text-body leading-relaxed">
+          {SITE_SCOPE}
+        </p>
+        <div className="mt-8 flex flex-col items-center gap-4 sm:flex-row sm:justify-center">
           <Link
             href="/contact"
             className="inline-flex min-h-[44px] w-full items-center justify-center rounded bg-accent px-8 py-3 font-semibold text-white transition-colors hover:bg-[#1d4ed8] sm:w-auto"
@@ -112,7 +117,7 @@ export default function HomePage() {
 
       <Section alt>
         <h2 className="text-balance text-2xl font-bold text-heading sm:text-3xl">
-          Forensic Expert Witness UK: Key Facts
+          Forensic Expert Witness: Key Facts
         </h2>
         <ResponsiveTable className="mt-6">
           <table className="w-full min-w-[600px] border-collapse text-sm">
@@ -147,22 +152,24 @@ export default function HomePage() {
           </table>
         </ResponsiveTable>
         <p className="mt-4 text-sm text-body/80">
-          Rates are indicative and vary by discipline, seniority, and case
-          complexity. All forensic expert witnesses owe their primary duty to the
-          court under CPR Part 35.
+          Rates are indicative and vary by discipline, seniority, jurisdiction,
+          and case complexity. Expert duties and procedural rules depend on the
+          forum (for example CPR Part 35 in England and Wales, or IBA Rules in
+          international arbitration).
         </p>
       </Section>
 
       <Section>
         <h2 className="text-balance text-2xl font-bold text-heading sm:text-3xl">
-          The UK&apos;s Multi-Discipline Forensic Portal
+          A Global Multi-Discipline Forensic Portal
         </h2>
         <p className="mt-4 max-w-3xl text-body leading-relaxed">
-          Whether your dispute requires a forensic accountant to quantify losses,
-          a quantum expert for a construction claim, a digital forensics
-          specialist for data theft evidence, or a forensic economist for
-          competition damages, DisputeForensic.com matches you with the right
-          expert.{" "}
+          Whether your dispute sits in a domestic court or an international
+          tribunal, DisputeForensic.com matches you with the right expert,
+          forensic accountant, quantum specialist, digital forensics analyst, or
+          forensic economist. We work with legal teams across jurisdictions; UK
+          procedural references on this site illustrate one common framework,
+          not an exclusive geographic focus.{" "}
           <Link href="/what-is-forensic-expert-witness" className="text-accent underline">
             What is a forensic expert witness?
           </Link>{" "}

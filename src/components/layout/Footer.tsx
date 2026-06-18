@@ -6,6 +6,7 @@ import {
   footerCopyright,
   footerDisclaimer,
 } from "@/data/nav";
+import { SITE_SCOPE } from "@/lib/site";
 
 export function Footer() {
   return (
@@ -38,6 +39,7 @@ export function Footer() {
             <SiteEmailLink className="text-white/90 hover:text-white" />
           </p>
           <p className="mt-4 text-sm text-white/60">{footerDisclaimer}</p>
+          <p className="mt-3 text-sm text-white/55">{SITE_SCOPE}</p>
           <p className="mt-2 text-sm text-white/50">{footerCopyright}</p>
           <div className="mt-4 flex flex-wrap items-center gap-x-4 gap-y-2 text-sm">
             <Link href="/cookies" className="text-white/60 hover:text-white">

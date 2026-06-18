@@ -11,9 +11,9 @@ import { getAllDisciplines } from "@/data/disciplines";
 
 export const metadata = createMetadata({
   title:
-    "What Is a Forensic Expert Witness? | UK Role, Disciplines & CPR Part 35",
+    "What Is a Forensic Expert Witness? | Role, Disciplines & Expert Duties",
   description:
-    "A forensic expert witness applies scientific or specialist methodology to disputes and litigation. Forensic accounting, engineering, digital forensics, and economics explained for UK solicitors.",
+    "A forensic expert witness applies scientific or specialist methodology to disputes and litigation. Forensic accounting, engineering, digital forensics, and economics explained for legal teams worldwide.",
   path: "/what-is-forensic-expert-witness",
 });
 
@@ -33,6 +33,7 @@ export default function WhatIsForensicExpertWitnessPage() {
       />
       <PageHero
         title="What Is a Forensic Expert Witness?"
+        subtitle="How forensic experts differ from lay witnesses, the four core disciplines, and how expert duties apply in domestic courts and international arbitration."
         breadcrumbs={[
           { label: "Home", href: "/" },
           { label: "What Is a Forensic Expert Witness?" },
@@ -43,19 +44,20 @@ export default function WhatIsForensicExpertWitnessPage() {
           <h2>Definition</h2>
           <p>
             A forensic expert witness is a qualified specialist who applies the
-            rigorous methodology and professional standards of their discipline , 
+            rigorous methodology and professional standards of their discipline,
             whether accounting, engineering, computing, or economics, to provide
             independent expert evidence in legal proceedings. The word
-            &quot;forensic&quot; derives from the Latin forensis (of the forum)
-           , meaning knowledge presented in a public, legal setting for the
+            &quot;forensic&quot; derives from the Latin forensis (of the forum),
+            meaning knowledge presented in a public, legal setting for the
             resolution of disputes.
           </p>
           <p>
             Unlike a lay witness who can only testify about facts they personally
             observed, a forensic expert witness may express opinions within their
             area of expertise, supported by analysis, investigation, and
-            professional judgment. In UK civil proceedings, all forensic expert
-            witnesses owe their primary duty to the court under CPR Part 35, not
+            professional judgment. Forensic expert witnesses owe their primary
+            duty to the court or tribunal (for example under CPR Part 35 in
+            England and Wales, or IBA Rules in international arbitration), not
             to the instructing party.
           </p>
 

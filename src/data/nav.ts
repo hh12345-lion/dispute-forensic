@@ -126,6 +126,6 @@ export const footerColumns: FooterColumn[] = [
 ];
 
 export const footerDisclaimer =
-  "DisputeForensic.com connects solicitors with forensic expert witnesses across all disciplines. We are not a law firm and do not provide legal advice.";
+  "DisputeForensic.com connects legal professionals worldwide with forensic expert witnesses across all disciplines. We are not a law firm and do not provide legal advice.";
 
-export const footerCopyright = "© 2025 DisputeForensic. England and Wales.";
+export const footerCopyright = "© 2025 DisputeForensic. All rights reserved.";

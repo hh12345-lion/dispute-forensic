@@ -9,7 +9,7 @@ interface CTASectionProps {
 
 export function CTASection({
   title = "Ready to instruct a forensic expert witness?",
-  description = "Submit your case details and we will match you with the right forensic expert across accounting, engineering, digital forensics, or economics. CPR Part 35 and IBA Rules compliant. Response within 1 business day.",
+  description = "Submit your case details and we will match you with the right forensic expert across accounting, engineering, digital forensics, or economics. Serving legal teams in domestic courts and international arbitration worldwide. Response within 1 business day.",
   buttonLabel = "Instruct an Expert",
 }: CTASectionProps) {
   return (

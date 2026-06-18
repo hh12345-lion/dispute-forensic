@@ -1,13 +1,13 @@
 import type { PillarSection } from "./types";
 
 export const FORENSIC_DISCIPLINES_PILLAR_H1 =
-  "Forensic Expert Witness Disciplines: The Complete UK Guide";
+  "Forensic Expert Witness Disciplines: The Complete Guide";
 
 export const FORENSIC_DISCIPLINES_PILLAR_META = {
   title:
-    "Forensic Expert Witness Disciplines UK | Accounting, Engineering, Digital & Economics",
+    "Forensic Expert Witness Disciplines | Accounting, Engineering, Digital & Economics",
   description:
-    "The complete guide to forensic expert witness disciplines for UK litigation, forensic accounting, forensic engineering, digital forensics, forensic economics, and when each is needed.",
+    "The complete guide to forensic expert witness disciplines for litigation and arbitration worldwide: forensic accounting, forensic engineering, digital forensics, forensic economics, and when each is needed.",
 };
 
 const COMPARISON_TABLE = `<table>

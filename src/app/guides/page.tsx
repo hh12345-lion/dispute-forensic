@@ -8,9 +8,9 @@ import { breadcrumbSchema } from "@/lib/schema";
 import { getAllGuides } from "@/data/guides";
 
 export const metadata = createMetadata({
-  title: "Solicitor Guides: Forensic Expert Witnesses UK | All Disciplines",
+  title: "Guides: Forensic Expert Witnesses | All Disciplines",
   description:
-    "In-depth guides for UK solicitors on forensic expert witnesses, forensic accounting, construction quantum, digital forensics, competition economics, and more.",
+    "In-depth guides on forensic expert witnesses for legal teams worldwide: forensic accounting, construction quantum, digital forensics, competition economics, and more.",
   path: "/guides",
 });
 
@@ -26,8 +26,8 @@ export default function GuidesPage() {
         ])}
       />
       <PageHero
-        title="Guides: Forensic Expert Witnesses for UK Disputes"
-        subtitle="In-depth solicitor guides on instructing forensic expert witnesses across all disciplines, from forensic accounting and construction quantum to digital forensics, competition economics, hot-tubbing, and multi-discipline teams."
+        title="Guides: Forensic Expert Witnesses for Complex Disputes"
+        subtitle="In-depth guides on instructing forensic expert witnesses across all disciplines, from forensic accounting and construction quantum to digital forensics, competition economics, hot-tubbing, and multi-discipline teams. Applicable across jurisdictions."
         breadcrumbs={[
           { label: "Home", href: "/" },
           { label: "Guides" },

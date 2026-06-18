@@ -60,7 +60,7 @@ export default function ForensicDisciplinesPage() {
       />
       <PageHero
         title={FORENSIC_DISCIPLINES_PILLAR_H1}
-        subtitle="The complete guide to forensic expert witness disciplines for UK litigation, forensic accounting, forensic engineering, digital forensics, forensic economics, and when each is needed."
+        subtitle="The complete guide to forensic expert witness disciplines for litigation and arbitration worldwide: forensic accounting, forensic engineering, digital forensics, forensic economics, and when each is needed."
         breadcrumbs={[
           { label: "Home", href: "/" },
           { label: "Forensic Disciplines" },

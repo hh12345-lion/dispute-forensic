@@ -16,9 +16,9 @@ import {
 import { getAllServices } from "@/data/services";
 
 export const metadata = createMetadata({
-  title: "Forensic Expert Witness Services UK | All Disciplines",
+  title: "Forensic Expert Witness Services | All Disciplines",
   description:
-    "UK forensic expert witness services across all disciplines: forensic accounting, forensic engineering quantum, digital forensics, forensic economics, and expert witness reports for all dispute types.",
+    "Forensic expert witness services across all disciplines: forensic accounting, forensic engineering quantum, digital forensics, forensic economics, and expert witness reports for disputes worldwide.",
   path: "/services",
 });
 
@@ -47,8 +47,8 @@ export default function ServicesPage() {
         ]}
       />
       <PageHero
-        title="Forensic Expert Witness Services UK"
-        subtitle="From forensic loss quantification and fraud investigation to construction quantum, digital forensics, economic damages analysis, and expert determination, our multi-discipline network supports UK solicitors across every type of forensic dispute."
+        title="Forensic Expert Witness Services"
+        subtitle="From forensic loss quantification and fraud investigation to construction quantum, digital forensics, economic damages analysis, and expert determination, our multi-discipline network supports legal teams across domestic litigation and international arbitration."
         breadcrumbs={[
           { label: "Home", href: "/" },
           { label: "Services" },

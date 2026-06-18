@@ -21,9 +21,9 @@ export const viewport: Viewport = {
 
 export const metadata: Metadata = createMetadata({
   title:
-    "Dispute Forensic Expert Witness UK | Forensic Accounting, Engineering & Digital Forensics",
+    "Dispute Forensic Expert Witness | Accounting, Engineering & Digital Forensics",
   description:
-    "Find a qualified forensic expert witness in the UK across all disciplines. Forensic accounting, forensic engineering, digital forensics, and forensic economics for disputes, litigation, and arbitration.",
+    "Find qualified forensic expert witnesses across accounting, engineering, digital forensics, and economics for litigation and international arbitration worldwide.",
   path: "/",
 });
 
