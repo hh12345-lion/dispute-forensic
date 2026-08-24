@@ -10,16 +10,15 @@ import { SiteEmailLink } from "@/components/SiteEmailLink";
 export const metadata = createMetadata({
   title: "Instruct a Forensic Expert Witness | DisputeForensic.com",
   description:
-    "Submit your case details to be matched with the right forensic expert witness for your discipline and dispute type. Serving legal teams worldwide. Response within 1 business day.",
+    "Submit your case details to be matched with the right forensic expert witness. Serving legal teams worldwide. Response within 1 business day.",
   path: "/contact",
 });
 
 const trustPoints = [
-  "All 4 forensic disciplines covered",
+  "All four forensic disciplines covered",
   "Domestic litigation and international arbitration",
-  "CPR Part 35, IBA Rules, and equivalent standards",
-  "SJE and party-appointed available",
-  "Response within 1 business day",
+  "Confidential enquiry handling",
+  "Response within one business day",
 ];
 
 export default function ContactPage() {
@@ -33,34 +32,23 @@ export default function ContactPage() {
       />
       <PageHero
         title="Instruct a Forensic Expert Witness"
-        subtitle="Tell us your dispute type, jurisdiction, and forensic discipline needed. We match you with the right expert from our multi-discipline network. All enquiries are treated confidentially, wherever you instruct from."
+        subtitle="Tell us about your dispute and the forensic discipline you need. We match you with a qualified expert from our global network. All enquiries are treated confidentially."
         breadcrumbs={[{ label: "Home", href: "/" }, { label: "Contact" }]}
       />
       <Section>
-        <p className="mx-auto mb-10 max-w-3xl text-body leading-relaxed">
-          Whether you need a forensic accountant for loss quantification, a
-          quantum expert for a construction claim, a digital forensics specialist
-          for data theft evidence, or a forensic economist for competition
-          damages, submit your case details and we will match you with a
-          qualified expert.{" "}
-          <Link href="/how-to-instruct" className="text-accent underline">
-            How to instruct guide →
-          </Link>
-        </p>
-
-        <div className="grid min-w-0 gap-8 lg:grid-cols-3 lg:gap-10">
-          <div className="min-w-0 lg:order-1 lg:col-span-2">
+        <div className="grid min-w-0 gap-10 lg:grid-cols-[minmax(0,1.4fr)_minmax(0,1fr)] lg:gap-14">
+          <div className="min-w-0">
             <ContactForm />
           </div>
-          <aside className="min-w-0 rounded-[8px] border border-border bg-section-alt p-5 sm:p-6 lg:order-2">
-            <h2 className="text-lg font-bold text-heading">
-              Why Instruct Through Us
+          <aside className="min-w-0 border border-border bg-section-alt p-5 sm:p-6">
+            <h2 className="font-serif text-lg font-semibold text-heading">
+              What happens next
             </h2>
-            <ul className="mt-4 space-y-4">
+            <ul className="mt-4 space-y-3">
               {trustPoints.map((point) => (
-                <li key={point} className="flex items-start gap-2 text-body">
-                  <span className="text-accent" aria-hidden>
-                    ✓
+                <li key={point} className="flex items-start gap-2 text-sm text-body">
+                  <span className="mt-0.5 text-accent" aria-hidden>
+                    —
                   </span>
                   {point}
                 </li>
@@ -71,15 +59,10 @@ export default function ContactPage() {
               <SiteEmailLink className="font-medium text-accent hover:underline" />
             </p>
             <p className="mt-4 text-sm text-body">
-              Not sure which discipline you need?{" "}
+              Not sure which discipline?{" "}
               <Link href="/forensic-disciplines" className="text-accent underline">
                 View all disciplines
-              </Link>{" "}
-              or{" "}
-              <Link href="/glossary" className="text-accent underline">
-                browse the glossary
               </Link>
-              .
             </p>
           </aside>
         </div>

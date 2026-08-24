@@ -20,9 +20,9 @@ export default function TermsPage() {
           <h2>About This Service</h2>
           <p>
             DisputeForensic.com is a referral and matching service that connects
-            UK solicitors, barristers, law firms, and international arbitration
-            counsel with qualified forensic expert witnesses across all
-            disciplines. We are not a law firm and do not provide legal advice.
+            legal professionals worldwide with qualified forensic expert witnesses
+            across all disciplines. We are not a law firm and do not provide legal
+            advice.
           </p>
 
           <h2>No Client Relationship</h2>
@@ -47,13 +47,6 @@ export default function TermsPage() {
             Each expert remains independently responsible for evidence within
             their area of expertise under CPR Part 35 or applicable arbitration
             rules.
-          </p>
-
-          <h2>Fees</h2>
-          <p>
-            Forensic expert witness fees are agreed directly between the
-            instructing party and the expert. We do not charge referral fees to
-            solicitors unless separately agreed in writing.
           </p>
 
           <h2>Limitation of Liability</h2>

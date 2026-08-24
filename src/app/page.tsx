@@ -29,12 +29,10 @@ export const metadata = createMetadata({
 const stats = [
   ["Core forensic disciplines", "4", "Accounting, engineering, digital, economics"],
   ["Geographic coverage", "Worldwide", "Domestic courts and international arbitration"],
-  ["Court framework (civil)", "CPR Part 35", "Civil Procedure Rules (UK)"],
-  ["Court framework (family)", "FPR Part 25", "Family Procedure Rules (UK)"],
-  ["Arbitration evidence rules", "IBA Rules Art 5/6", "ICC, LCIA, ICSID, UNCITRAL"],
-  ["Typical hourly rate range", "£150–£600+/hr", "Discipline-dependent"],
   ["Expert witness services", "8", "Full dispute lifecycle"],
   ["Multi-discipline matching", "Yes", "Coordinated expert teams"],
+  ["International forums", "ICC, LCIA, ICSID", "UNCITRAL and domestic courts"],
+  ["Response time", "1 business day", "Enquiry acknowledgement"],
 ];
 
 export default function HomePage() {
@@ -56,33 +54,33 @@ export default function HomePage() {
       <JsonLd data={homepageSchema} />
       <PageHero
         title="Forensic Expert Witness Services for Legal Teams Worldwide"
-        subtitle="DisputeForensic.com is a multi-discipline forensic expert witness portal, connecting solicitors, counsel, in-house legal teams, and international arbitration practitioners with qualified experts across forensic accounting, forensic engineering and quantum, digital forensics, and forensic economics."
+        subtitle="DisputeForensic.com is a multi-discipline forensic expert witness portal, connecting legal teams with qualified experts across forensic accounting, forensic engineering and quantum, digital forensics, and forensic economics."
       />
       <Section>
-        <p className="mx-auto max-w-3xl text-center text-body leading-relaxed">
+        <p className="mx-auto max-w-2xl text-center text-body leading-relaxed">
           {SITE_SCOPE}
         </p>
         <div className="mt-8 flex flex-col items-center gap-4 sm:flex-row sm:justify-center">
           <Link
             href="/contact"
-            className="inline-flex min-h-[44px] w-full items-center justify-center rounded bg-accent px-8 py-3 font-semibold text-white transition-colors hover:bg-[#1d4ed8] sm:w-auto"
+            className="inline-flex min-h-[44px] w-full items-center justify-center border border-accent bg-accent px-8 py-3 text-sm font-semibold text-white transition-colors hover:bg-accent-hover sm:w-auto"
           >
-            Instruct an Expert
+            Submit Enquiry
           </Link>
           <Link
             href="/forensic-disciplines"
-            className="inline-flex min-h-[44px] w-full items-center justify-center rounded border-2 border-primary px-8 py-3 font-semibold text-primary transition-colors hover:bg-section-alt sm:w-auto"
+            className="inline-flex min-h-[44px] w-full items-center justify-center border border-primary px-8 py-3 text-sm font-semibold text-primary transition-colors hover:bg-section-alt sm:w-auto"
           >
-            Explore All Disciplines
+            Explore Disciplines
           </Link>
         </div>
       </Section>
 
       <Section alt>
-        <h2 className="text-balance text-2xl font-bold text-heading sm:text-3xl">
+        <h2 className="font-serif text-balance text-2xl font-semibold text-heading sm:text-3xl">
           Four Forensic Expert Witness Disciplines
         </h2>
-        <p className="mt-3 max-w-3xl text-body leading-relaxed">
+        <p className="mt-3 max-w-2xl text-sm leading-relaxed text-body">
           Complex disputes require the right forensic discipline, or a
           coordinated multi-discipline team. DisputeForensic.com covers all four
           core forensic expert witness disciplines under one roof.
@@ -100,7 +98,7 @@ export default function HomePage() {
       </Section>
 
       <Section>
-        <h2 className="text-balance text-2xl font-bold text-heading sm:text-3xl">
+        <h2 className="font-serif text-balance text-2xl font-semibold text-heading sm:text-3xl">
           Forensic Expert Witness Services
         </h2>
         <div className="mt-8 grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
@@ -116,13 +114,13 @@ export default function HomePage() {
       </Section>
 
       <Section alt>
-        <h2 className="text-balance text-2xl font-bold text-heading sm:text-3xl">
+        <h2 className="font-serif text-balance text-2xl font-semibold text-heading sm:text-3xl">
           Forensic Expert Witness: Key Facts
         </h2>
         <ResponsiveTable className="mt-6">
           <table className="w-full min-w-[600px] border-collapse text-sm">
             <thead>
-              <tr className="bg-section-alt">
+              <tr className="bg-section-warm">
                 <th className="border border-border px-4 py-3 text-left font-semibold text-heading">
                   Metric
                 </th>
@@ -151,25 +149,17 @@ export default function HomePage() {
             </tbody>
           </table>
         </ResponsiveTable>
-        <p className="mt-4 text-sm text-body/80">
-          Rates are indicative and vary by discipline, seniority, jurisdiction,
-          and case complexity. Expert duties and procedural rules depend on the
-          forum (for example CPR Part 35 in England and Wales, or IBA Rules in
-          international arbitration).
-        </p>
       </Section>
 
       <Section>
-        <h2 className="text-balance text-2xl font-bold text-heading sm:text-3xl">
+        <h2 className="font-serif text-balance text-2xl font-semibold text-heading sm:text-3xl">
           A Global Multi-Discipline Forensic Portal
         </h2>
-        <p className="mt-4 max-w-3xl text-body leading-relaxed">
+        <p className="mt-4 max-w-2xl text-sm leading-relaxed text-body">
           Whether your dispute sits in a domestic court or an international
           tribunal, DisputeForensic.com matches you with the right expert,
           forensic accountant, quantum specialist, digital forensics analyst, or
-          forensic economist. We work with legal teams across jurisdictions; UK
-          procedural references on this site illustrate one common framework,
-          not an exclusive geographic focus.{" "}
+          forensic economist. We work with legal teams across jurisdictions.{" "}
           <Link href="/what-is-forensic-expert-witness" className="text-accent underline">
             What is a forensic expert witness?
           </Link>{" "}

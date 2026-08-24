@@ -30,7 +30,7 @@ export function CookieBanner() {
         className="fixed inset-x-0 bottom-0 z-[90] border-t border-white/10 bg-primary text-white shadow-[0_-4px_24px_rgba(0,0,0,0.2)] motion-safe:animate-[dfCookieSlideUp_280ms_ease-out]"
       >
         <div
-          className="h-0.5 w-full bg-gradient-to-r from-[#C5A572] via-accent to-[#C5A572]"
+          className="h-0.5 w-full bg-accent"
           aria-hidden
         />
         <div className="mx-auto max-w-7xl px-4 py-3 sm:px-6 sm:py-3.5 pb-[max(0.75rem,env(safe-area-inset-bottom))]">
@@ -71,7 +71,7 @@ export function CookieBanner() {
               <button
                 type="button"
                 onClick={acceptAll}
-                className="min-h-[44px] w-full rounded-lg bg-accent px-4 py-2 text-sm font-semibold text-white shadow-sm transition hover:bg-[#1d4ed8] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-accent xs:w-auto"
+                className="min-h-[44px] w-full rounded-lg bg-accent px-4 py-2 text-sm font-semibold text-white shadow-sm transition hover:bg-accent-hover focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-accent xs:w-auto"
               >
                 Accept All
               </button>

@@ -51,18 +51,11 @@ export default function CookiesPage() {
 
           <h2>Your Choices (GDPR &amp; ePrivacy)</h2>
           <p>
-            Under UK GDPR and the Privacy and Electronic Communications
-            Regulations (PECR), we must obtain your consent before placing
-            non-essential cookies on your device. When you first visit our site,
-            you can <strong>Accept All</strong>,{" "}
+            Non-essential cookies require your consent where required by law.
+            When you first visit our site, you can <strong>Accept All</strong>,{" "}
             <strong>Reject Non-Essential</strong>, or{" "}
             <strong>Customise Preferences</strong>. You may change your mind at
             any time using <strong>Cookie Settings</strong> in the footer.
-          </p>
-          <p>
-            California residents: we do not sell personal information. You may
-            opt out of non-essential cookies via Cookie Settings (CCPA best
-            practice).
           </p>
 
           <h2>Cookie Categories</h2>

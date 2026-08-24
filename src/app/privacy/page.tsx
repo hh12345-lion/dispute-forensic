@@ -5,7 +5,7 @@ import { SiteEmailLink } from "@/components/SiteEmailLink";
 
 export const metadata = createMetadata({
   title: "Privacy Policy | DisputeForensic.com",
-  description: "Privacy policy for DisputeForensic.com, UK GDPR compliant.",
+  description: "Privacy policy for DisputeForensic.com.",
   path: "/privacy",
   noindex: true,
   nofollow: false,
@@ -29,11 +29,11 @@ export default function PrivacyPage() {
 
           <h2>What Data We Collect</h2>
           <p>
-            When you submit an enquiry form, we collect your name, organisation,
-            email address, phone number (if provided), and case details you
-            choose to share including dispute type, forensic discipline needed,
-            court or forum, and approximate claim value. We process contact form
-            submissions via Formspree when configured.
+            When you submit an enquiry form, we collect your name, email address,
+            phone number (if provided), optional discipline selection, and the
+            case details you choose to share in your message. Submissions are
+            processed via our secure API and may be stored in Google Sheets when
+            configured, or forwarded to Formspree as a fallback.
           </p>
 
           <h2>Lawful Basis</h2>
@@ -59,9 +59,9 @@ export default function PrivacyPage() {
 
           <h2>Your Rights</h2>
           <p>
-            Under UK GDPR, you have the right to access, rectify, erase, restrict
-            processing, object, and data portability. You may lodge a complaint
-            with the Information Commissioner&apos;s Office (ICO). Contact us at{" "}
+            Depending on your location, you may have rights to access, rectify,
+            erase, restrict processing, object, and data portability. Contact us
+            at{" "}
             <SiteEmailLink className="text-accent hover:underline" /> to
             exercise your rights.
           </p>
@@ -75,9 +75,9 @@ export default function PrivacyPage() {
 
           <h2>International Transfers</h2>
           <p>
-            Form data may be processed by Formspree (US-based) when configured.
-            Appropriate safeguards are in place including Standard Contractual
-            Clauses where applicable.
+            Where third-party processors are used (for example Google Sheets or
+            Formspree), data may be processed outside your country. Appropriate
+            safeguards are applied where required by applicable law.
           </p>
 
           <p className="text-sm text-body/70">Last updated: May 2025</p>

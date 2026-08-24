@@ -17,15 +17,15 @@ export const metadata = createMetadata({
 const nextSteps = [
   {
     title: "Review",
-    text: "We review your case details and match you with a qualified forensic expert across the relevant discipline.",
+    text: "We review your enquiry and match you with a qualified forensic expert across the relevant discipline.",
   },
   {
     title: "Response",
-    text: "You will hear from us within 1 business day at the email address you provided.",
+    text: "You will hear from us within one business day at the email address you provided.",
   },
   {
     title: "Instruction",
-    text: "If appropriate, we arrange a preliminary discussion before formal instruction and letter of engagement.",
+    text: "If appropriate, we arrange a preliminary discussion before formal instruction.",
   },
 ];
 
@@ -49,13 +49,13 @@ export default function ThankYouPage() {
       <Section>
         <div className="mx-auto min-w-0 max-w-2xl text-center">
           <div
-            className="mx-auto flex h-16 w-16 items-center justify-center rounded-full bg-section-alt text-2xl text-accent"
+            className="mx-auto flex h-14 w-14 items-center justify-center border-2 border-accent text-xl text-accent"
             aria-hidden
           >
             ✓
           </div>
           <p className="mt-6 text-base leading-relaxed text-body sm:text-lg">
-            A member of our team will review your case details and contact you
+            A member of our team will review your enquiry and contact you
             shortly. For urgent matters, email{" "}
             <SiteEmailLink className="font-medium text-accent hover:underline" />.
           </p>
@@ -64,9 +64,9 @@ export default function ThankYouPage() {
             {nextSteps.map((step, i) => (
               <li
                 key={step.title}
-                className="flex min-w-0 gap-4 rounded-[8px] border border-border bg-section-alt p-4 sm:p-5"
+                className="flex min-w-0 gap-4 border border-border bg-section-alt p-4 sm:p-5"
               >
-                <span className="flex h-8 w-8 shrink-0 items-center justify-center rounded-full bg-primary text-sm font-bold text-white">
+                <span className="flex h-8 w-8 shrink-0 items-center justify-center border border-primary text-sm font-bold text-primary">
                   {i + 1}
                 </span>
                 <div className="min-w-0">
@@ -82,13 +82,13 @@ export default function ThankYouPage() {
           <div className="mt-10 flex flex-col items-stretch gap-3 sm:flex-row sm:justify-center sm:gap-4">
             <Link
               href="/"
-              className="inline-flex min-h-[44px] items-center justify-center rounded bg-accent px-8 py-3 font-semibold text-white transition-colors hover:bg-[#1d4ed8]"
+              className="inline-flex min-h-[44px] items-center justify-center border border-accent bg-accent px-8 py-3 text-sm font-semibold text-white transition-colors hover:bg-accent-hover"
             >
               Return to Homepage
             </Link>
             <Link
               href="/services"
-              className="inline-flex min-h-[44px] items-center justify-center rounded border-2 border-primary px-8 py-3 font-semibold text-primary hover:bg-section-alt"
+              className="inline-flex min-h-[44px] items-center justify-center border border-primary px-8 py-3 text-sm font-semibold text-primary hover:bg-section-alt"
             >
               Browse Services
             </Link>

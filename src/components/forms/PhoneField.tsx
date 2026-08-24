@@ -1,14 +1,15 @@
 "use client";
 
 const PREFIXES = [
-  { value: "+44", label: "UK +44" },
-  { value: "+353", label: "IE +353" },
-  { value: "+1", label: "US/CA +1" },
-  { value: "+61", label: "AU +61" },
-  { value: "+49", label: "DE +49" },
-  { value: "+33", label: "FR +33" },
-  { value: "+971", label: "UAE +971" },
-  { value: "+65", label: "SG +65" },
+  { value: "+44", label: "+44 UK" },
+  { value: "+353", label: "+353 IE" },
+  { value: "+49", label: "+49 DE" },
+  { value: "+33", label: "+33 FR" },
+  { value: "+971", label: "+971 UAE" },
+  { value: "+65", label: "+65 SG" },
+  { value: "+61", label: "+61 AU" },
+  { value: "+1", label: "+1" },
+  { value: "+", label: "Other" },
 ];
 
 interface PhoneFieldProps {
@@ -20,7 +21,7 @@ export function PhoneField({ inputClass, labelClass }: PhoneFieldProps) {
   return (
     <div>
       <label htmlFor="phone" className={labelClass}>
-        Phone
+        Phone (optional)
       </label>
       <div className="flex min-w-0 flex-col gap-2 sm:flex-row">
         <select
@@ -42,7 +43,7 @@ export function PhoneField({ inputClass, labelClass }: PhoneFieldProps) {
           type="tel"
           inputMode="tel"
           autoComplete="tel-national"
-          placeholder="7123 456789"
+          placeholder="Phone number"
           className={`${inputClass} min-w-0 flex-1`}
         />
       </div>
@@ -57,6 +58,7 @@ export function formatPhoneFromFormData(data: FormData): string {
     .replace(/\s/g, "")
     .trim();
   if (!national) return "";
+  if (prefix === "+") return national.startsWith("+") ? national : `+${national}`;
   const normalizedPrefix = prefix.startsWith("+") ? prefix : `+${prefix}`;
   return `${normalizedPrefix}${national}`;
 }

@@ -1,5 +1,5 @@
 import type { Metadata, Viewport } from "next";
-import { Inter } from "next/font/google";
+import { IBM_Plex_Sans, IBM_Plex_Serif } from "next/font/google";
 import { Header } from "@/components/layout/Header";
 import { Footer } from "@/components/layout/Footer";
 import { CookieConsentRoot } from "@/components/cookies/CookieConsentRoot";
@@ -7,9 +7,17 @@ import { ConsentDefaultsScript } from "@/components/cookies/ConsentDefaultsScrip
 import { createMetadata } from "@/lib/metadata";
 import "./globals.css";
 
-const inter = Inter({
+const plexSans = IBM_Plex_Sans({
   subsets: ["latin"],
-  variable: "--font-inter",
+  weight: ["400", "500", "600", "700"],
+  variable: "--font-plex-sans",
+  display: "swap",
+});
+
+const plexSerif = IBM_Plex_Serif({
+  subsets: ["latin"],
+  weight: ["400", "600", "700"],
+  variable: "--font-plex-serif",
   display: "swap",
 });
 
@@ -33,7 +41,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en-GB" className={`${inter.variable} h-full`}>
+    <html lang="en" className={`${plexSans.variable} ${plexSerif.variable} h-full`}>
       <body className="flex min-h-full flex-col antialiased">
         <ConsentDefaultsScript />
         <CookieConsentRoot>

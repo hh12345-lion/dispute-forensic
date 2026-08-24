@@ -83,15 +83,10 @@ export const organizationSchema = {
   name: SITE_NAME,
   url: SITE_URL,
   email: SITE_EMAIL,
-  address: {
-    "@type": "PostalAddress",
-    addressCountry: "GB",
+  areaServed: {
+    "@type": "Place",
+    name: "Worldwide",
   },
-  areaServed: [
-    { "@type": "Country", name: "United Kingdom" },
-    { "@type": "Country", name: "United States" },
-    { "@type": "AdministrativeArea", name: "European Union" },
-  ],
   sameAs: [LINKEDIN_URL],
 };
 
@@ -103,7 +98,7 @@ export function professionalServiceSchema(
     "@id": `${SITE_URL}/#service`,
     name: "DisputeForensic",
     provider: { "@id": `${SITE_URL}/#organization` },
-    areaServed: ["United Kingdom", "United States", "European Union"],
+    areaServed: "Worldwide",
     serviceType: "Forensic Expert Witness",
     hasOfferCatalog: {
       "@type": "OfferCatalog",
@@ -147,12 +142,7 @@ export function serviceNode(
     name,
     description,
     provider: { "@id": `${SITE_URL}/#organization` },
-    areaServed: [
-      "United Kingdom",
-      "United States",
-      "European Union",
-      "International",
-    ],
+    areaServed: "Worldwide",
   };
 }
 
