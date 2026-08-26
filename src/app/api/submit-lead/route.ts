@@ -1,27 +1,24 @@
 import { NextResponse } from "next/server";
-import { isGoogleSheetsConfigured } from "@/lib/google-sheets";
 import {
-  appendLeadToSheet,
   getLeadWebhookUrl,
   notifyLeadWebhook,
-  parseLeadBody,
-} from "@/lib/lead-submission";
+  parseContactLeadBody,
+} from "@/lib/leadNotification";
 
 /**
  * POST /api/submit-lead
- * Saves full contact intake to Google Sheets when configured, and/or
- * forwards name, email, phone to Lead_notification_url (four-key JSON).
+ * Forwards contact leads to Lead_notification_url (n8n) with the standard
+ * five-key JSON: Full Name, Email, Phone Number, Brand name, domain.
  */
 export async function POST(request: Request) {
   const webhookUrl = getLeadWebhookUrl();
-  const sheetsConfigured = isGoogleSheetsConfigured();
 
-  if (!sheetsConfigured && !webhookUrl) {
+  if (!webhookUrl) {
     return NextResponse.json(
       {
-        error: "NOT_CONFIGURED",
+        error: "WEBHOOK_MISSING",
         message:
-          "Set Google Sheets env vars and/or Lead_notification_url.",
+          "Lead_notification_url / LEAD_NOTIFICATION_URL is not configured.",
       },
       { status: 503 }
     );
@@ -34,7 +31,7 @@ export async function POST(request: Request) {
     return NextResponse.json({ error: "Invalid JSON body" }, { status: 400 });
   }
 
-  const lead = parseLeadBody(body);
+  const lead = parseContactLeadBody(body);
   if (!lead) {
     return NextResponse.json(
       { error: "fullName and email are required" },
@@ -42,33 +39,12 @@ export async function POST(request: Request) {
     );
   }
 
-  if (sheetsConfigured) {
-    try {
-      await appendLeadToSheet(lead);
-    } catch (err) {
-      console.error("Google Sheets write failed:", {
-        message: err instanceof Error ? err.message : "Unknown error",
-        sheetId: `${process.env.GOOGLE_SHEET_ID?.slice(0, 8)}...`,
-        tab: process.env.GOOGLE_SHEET_TAB_NAME,
-        timestamp: new Date().toISOString(),
-      });
-      if (!webhookUrl) {
-        return NextResponse.json(
-          { error: "Failed to save submission" },
-          { status: 502 }
-        );
-      }
-    }
-  }
-
-  if (webhookUrl) {
-    const webhookOk = await notifyLeadWebhook(lead, webhookUrl);
-    if (!webhookOk && !sheetsConfigured) {
-      return NextResponse.json(
-        { error: "Failed to deliver lead" },
-        { status: 502 }
-      );
-    }
+  const webhookOk = await notifyLeadWebhook(lead, webhookUrl);
+  if (!webhookOk) {
+    return NextResponse.json(
+      { error: "Failed to deliver lead to webhook" },
+      { status: 502 }
+    );
   }
 
   return NextResponse.json({ ok: true });

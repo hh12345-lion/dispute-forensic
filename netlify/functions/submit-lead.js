@@ -1,7 +1,7 @@
 /**
  * POST /api/submit-lead (via netlify.toml redirect) → n8n / webhook.
- * Env: Lead_notification_url or LEAD_NOTIFICATION_URL.
- * Outbound JSON: Full Name, Email, Phone Number, Brand name (four keys only).
+ * Env: Lead_notification_url or LEAD_NOTIFICATION_URL, NEXT_PUBLIC_SITE_URL.
+ * Outbound JSON: Full Name, Email, Phone Number, Brand name, domain (five keys).
  */
 const BRAND_NAME = "DisputeForensic";
 
@@ -10,7 +10,22 @@ function getLeadWebhookUrl() {
     process.env.Lead_notification_url ||
     process.env.LEAD_NOTIFICATION_URL ||
     ""
-  );
+  ).trim();
+}
+
+function getSiteDomain() {
+  const raw =
+    process.env.NEXT_PUBLIC_SITE_URL?.trim() ||
+    "https://www.disputeforensic.com";
+
+  try {
+    const hostname = new URL(
+      raw.startsWith("http") ? raw : `https://${raw}`
+    ).hostname;
+    return hostname.replace(/^www\./i, "");
+  } catch {
+    return "disputeforensic.com";
+  }
 }
 
 exports.handler = async (event) => {
@@ -73,6 +88,7 @@ exports.handler = async (event) => {
     Email: email,
     "Phone Number": phone,
     "Brand name": BRAND_NAME,
+    domain: getSiteDomain(),
   };
 
   let res;

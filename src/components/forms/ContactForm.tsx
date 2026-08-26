@@ -5,16 +5,6 @@ import { useRouter } from "next/navigation";
 import { SiteEmailLink } from "@/components/SiteEmailLink";
 import { PhoneField, formatPhoneFromFormData } from "./PhoneField";
 
-const disciplines = [
-  "",
-  "Forensic Accounting",
-  "Forensic Engineering / Quantum",
-  "Digital Forensics",
-  "Forensic Economics",
-  "Multiple Disciplines",
-  "Not Sure",
-];
-
 const formspreeId = process.env.NEXT_PUBLIC_FORMSPREE_FORM_ID;
 const formspreeUrl = formspreeId ? `https://formspree.io/f/${formspreeId}` : null;
 
@@ -49,20 +39,18 @@ export function ContactForm() {
     const fullName = String(data.get("name") || "").trim();
     const email = String(data.get("email") || "").trim();
     const phone = formatPhoneFromFormData(data);
-    const description = String(data.get("description") || "").trim();
 
-    if (!fullName || !email || !description) {
+    if (!fullName || !email) {
       setStatus("error");
-      setErrorMessage("Please enter your name, email, and a brief description.");
+      setErrorMessage("Please enter your full name and email.");
       return;
     }
 
     const payload = {
       fullName,
       email,
-      phone,
-      discipline: String(data.get("discipline") || "").trim(),
-      description,
+      phone: phone || "",
+      formType: "contact" as const,
     };
 
     try {
@@ -134,34 +122,6 @@ export function ContactForm() {
       </div>
 
       <PhoneField inputClass={inputClass} labelClass={labelClass} />
-
-      <div className="min-w-0">
-        <label htmlFor="discipline" className={labelClass}>
-          Forensic discipline (optional)
-        </label>
-        <select id="discipline" name="discipline" className={inputClass} defaultValue="">
-          <option value="">Select if known</option>
-          {disciplines.slice(1).map((d) => (
-            <option key={d} value={d}>
-              {d}
-            </option>
-          ))}
-        </select>
-      </div>
-
-      <div className="min-w-0">
-        <label htmlFor="description" className={labelClass}>
-          Brief description *
-        </label>
-        <textarea
-          id="description"
-          name="description"
-          rows={4}
-          required
-          placeholder="Dispute type, jurisdiction, and what you need from the expert"
-          className={`${inputClass} min-h-[100px] resize-y`}
-        />
-      </div>
 
       {status === "error" && (
         <p className="text-sm text-red-600" role="alert">

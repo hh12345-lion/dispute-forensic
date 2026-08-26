@@ -30,10 +30,9 @@ export default function PrivacyPage() {
           <h2>What Data We Collect</h2>
           <p>
             When you submit an enquiry form, we collect your name, email address,
-            phone number (if provided), optional discipline selection, and the
-            case details you choose to share in your message. Submissions are
-            processed via our secure API and may be stored in Google Sheets when
-            configured, or forwarded to Formspree as a fallback.
+            and phone number (if provided). Submissions are sent to our secure
+            API and forwarded to our lead notification webhook. Formspree may
+            be used as a fallback when the webhook is not configured.
           </p>
 
           <h2>Lawful Basis</h2>
@@ -75,9 +74,10 @@ export default function PrivacyPage() {
 
           <h2>International Transfers</h2>
           <p>
-            Where third-party processors are used (for example Google Sheets or
-            Formspree), data may be processed outside your country. Appropriate
-            safeguards are applied where required by applicable law.
+            Where third-party processors are used (for example our notification
+            webhook provider or Formspree), data may be processed outside your
+            country. Appropriate safeguards are applied where required by
+            applicable law.
           </p>
 
           <p className="text-sm text-body/70">Last updated: May 2025</p>

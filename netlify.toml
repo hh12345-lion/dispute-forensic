@@ -7,13 +7,13 @@
 [functions]
   directory = "netlify/functions"
 
-# POST /api/submit-lead → Next.js route (Google Sheets + webhook).
-# Uncomment only for function-only deploys without app/api/submit-lead/route.ts:
-# [[redirects]]
-#   from = "/api/submit-lead"
-#   to = "/.netlify/functions/submit-lead"
-#   status = 200
-#   force = true
+# POST /api/submit-lead → Netlify function (n8n webhook). Used by netlify dev;
+# production also served via app/api/submit-lead/route.ts when using @netlify/plugin-nextjs.
+[[redirects]]
+  from = "/api/submit-lead"
+  to = "/.netlify/functions/submit-lead"
+  status = 200
+  force = true
 
 [[headers]]
   for = "/sitemap.xml"
