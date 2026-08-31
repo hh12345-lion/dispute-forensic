@@ -27,7 +27,7 @@ export async function POST(request: Request) {
       );
     }
 
-    await writeSubmissionToSheetSafely(
+    const writtenToSheet = await writeSubmissionToSheetSafely(
       () => appendContactToSheet(lead),
       "contact"
     );
@@ -37,6 +37,7 @@ export async function POST(request: Request) {
         fullName: lead.fullName,
         email: lead.email,
         formType: lead.formType === "instruct" ? "Instruct" : "Contact",
+        writtenToSheet,
         notify: SITE_EMAIL,
       });
     } catch (err) {
@@ -46,10 +47,16 @@ export async function POST(request: Request) {
     return NextResponse.json({
       ok: true,
       success: true,
+      writtenToSheet,
       message: "Inquiry logged securely.",
     });
   } catch (error) {
     console.error("contact error:", error);
-    return NextResponse.json({ error: "Server error" }, { status: 500 });
+    return NextResponse.json({
+      ok: true,
+      success: true,
+      writtenToSheet: false,
+      soft: true,
+    });
   }
 }

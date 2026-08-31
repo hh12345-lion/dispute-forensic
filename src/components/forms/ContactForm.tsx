@@ -55,11 +55,17 @@ export function ContactForm() {
         return;
       }
 
-      void fetch("/api/contact", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(payload),
-      }).catch(() => {});
+      // Soft-fail secondary contact path if present (do not cancel via navigation).
+      try {
+        await fetch("/api/contact", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify(payload),
+          keepalive: true,
+        });
+      } catch {
+        /* ignore — submit-lead already handled webhook + Sheets */
+      }
 
       router.push("/thank-you");
     } catch {
