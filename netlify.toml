@@ -7,7 +7,8 @@
 [functions]
   directory = "netlify/functions"
 
-# POST /api/submit-lead: Next.js route (webhook + soft-fail Sheets) via @netlify/plugin-nextjs.
+# POST /api/submit-lead: Next.js route (webhook-only) via @netlify/plugin-nextjs.
+# Soft-fail Sheets/email: POST /api/contact (shared tab + Form Type).
 # Uncomment for function-only deploys without src/app/api/submit-lead/route.ts:
 # [[redirects]]
 #   from = "/api/submit-lead"

@@ -1,40 +1,18 @@
 import { NextResponse } from "next/server";
-import { isGoogleSheetsConfigured } from "@/lib/google-sheets";
 import {
   getLeadWebhookUrl,
   notifyLeadWebhook,
   parseContactLeadBody,
 } from "@/lib/leadNotification";
-import { appendLeadToSheet } from "@/lib/lead-submission";
-
-async function softFailAppendSheet(
-  lead: NonNullable<ReturnType<typeof parseContactLeadBody>>,
-  context: string
-): Promise<void> {
-  if (!isGoogleSheetsConfigured()) return;
-
-  try {
-    await appendLeadToSheet(lead);
-  } catch (err) {
-    console.error("Google Sheets error:", {
-      context,
-      message: err instanceof Error ? err.message : "Unknown error",
-      sheetId: `${process.env.GOOGLE_SHEET_ID?.slice(0, 8)}...`,
-      tab: process.env.GOOGLE_SHEET_TAB_NAME,
-      timestamp: new Date().toISOString(),
-    });
-  }
-}
+import { getSiteDomain } from "@/lib/seo";
 
 /**
- * POST /api/submit-lead
- * Webhook is primary. Sheets: one shared tab + Form Type; soft-fail only.
+ * Webhook-only lead path (primary).
+ * Sheets + email soft-fail via /api/contact (shared tab + Form Type).
  */
 export async function POST(request: Request) {
   const webhookUrl = getLeadWebhookUrl();
-  const sheetsConfigured = isGoogleSheetsConfigured();
-
-  if (!webhookUrl && !sheetsConfigured) {
+  if (!webhookUrl) {
     return NextResponse.json(
       {
         error: "WEBHOOK_MISSING",
@@ -60,19 +38,16 @@ export async function POST(request: Request) {
     );
   }
 
-  if (webhookUrl) {
-    const webhookOk = await notifyLeadWebhook(lead, webhookUrl);
-    if (!webhookOk) {
-      return NextResponse.json(
-        { error: "Failed to deliver lead to webhook" },
-        { status: 502 }
-      );
-    }
-
-    await softFailAppendSheet(lead, "submit-lead");
-    return NextResponse.json({ ok: true });
+  const webhookOk = await notifyLeadWebhook(lead, webhookUrl);
+  if (!webhookOk) {
+    return NextResponse.json(
+      { error: "Failed to deliver lead to webhook" },
+      { status: 502 }
+    );
   }
 
-  await softFailAppendSheet(lead, "submit-lead-sheets-only");
-  return NextResponse.json({ ok: true });
+  return NextResponse.json({
+    ok: true,
+    domain: getSiteDomain(),
+  });
 }
