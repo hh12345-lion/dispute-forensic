@@ -1,5 +1,6 @@
 import {
   appendRowWithRetry,
+  getGoogleSheetsConfigHint,
   isGoogleSheetsConfigured,
   type SheetTarget,
 } from "@/lib/google-sheets";
@@ -12,14 +13,16 @@ import { getSiteDomain } from "@/lib/seo";
 
 function sharedTab(): SheetTarget {
   return {
-    sheetName: process.env.GOOGLE_SHEET_TAB_NAME || "Sheet1",
+    sheetName: process.env.GOOGLE_SHEET_TAB_NAME?.trim() || "Sheet1",
   };
 }
 
 export async function appendContactToSheet(
   lead: ContactLeadInput
 ): Promise<void> {
-  if (!isGoogleSheetsConfigured()) return;
+  if (!isGoogleSheetsConfigured()) {
+    throw new Error(getGoogleSheetsConfigHint());
+  }
   await appendRowWithRetry(
     buildLeadSheetRow(lead, getSiteDomain()),
     2,
@@ -30,7 +33,9 @@ export async function appendContactToSheet(
 export async function appendInstructToSheet(
   lead: ContactLeadInput
 ): Promise<void> {
-  if (!isGoogleSheetsConfigured()) return;
+  if (!isGoogleSheetsConfigured()) {
+    throw new Error(getGoogleSheetsConfigHint());
+  }
   await appendRowWithRetry(
     buildLeadSheetRow(
       { ...lead, formType: "instruct" },
@@ -47,29 +52,35 @@ export async function writeSubmissionToSheetSafely(
   context: string
 ): Promise<boolean> {
   if (!isGoogleSheetsConfigured()) {
-    console.warn(`[sheets] not configured — skip (${context})`);
+    console.warn(`[sheets] skip (${context}): ${getGoogleSheetsConfigHint()}`);
     return false;
   }
 
   try {
     await writer();
+    console.log(`[sheets] row appended (${context})`, {
+      tab: process.env.GOOGLE_SHEET_TAB_NAME?.trim() || "Sheet1",
+      brand: BRAND_NAME,
+    });
     return true;
   } catch (error: unknown) {
     const err = error as {
       message?: string;
       code?: number;
-      response?: { status?: number };
+      response?: { status?: number; data?: { error?: { message?: string } } };
     };
-    console.error("Google Sheets error:", {
+    const apiMessage = err?.response?.data?.error?.message;
+    console.error("[sheets] append failed:", {
       context,
       brand: BRAND_NAME,
-      message: err?.message,
+      message: apiMessage || err?.message,
       code: err?.code,
       status: err?.response?.status,
+      configHint: getGoogleSheetsConfigHint(),
       spreadsheetId: process.env.GOOGLE_SHEET_ID
         ? `${process.env.GOOGLE_SHEET_ID.slice(0, 8)}...`
         : "missing",
-      tab: process.env.GOOGLE_SHEET_TAB_NAME || "Sheet1",
+      tab: process.env.GOOGLE_SHEET_TAB_NAME?.trim() || "Sheet1",
       timestamp: new Date().toISOString(),
     });
     return false;

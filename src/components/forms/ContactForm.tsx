@@ -5,10 +5,6 @@ import { useRouter } from "next/navigation";
 import { SiteEmailLink } from "@/components/SiteEmailLink";
 import { PhoneField, formatPhoneFromFormData } from "./PhoneField";
 
-/**
- * Webhook primary (/api/submit-lead), then soft-fail Sheets + email (/api/contact)
- * on one shared tab with Form Type.
- */
 export function ContactForm() {
   const router = useRouter();
   const [status, setStatus] = useState<"idle" | "loading" | "error">("idle");
@@ -18,6 +14,7 @@ export function ContactForm() {
     e.preventDefault();
     setStatus("loading");
     setErrorMessage(null);
+
     const form = e.currentTarget;
     const data = new FormData(form);
 
@@ -39,38 +36,38 @@ export function ContactForm() {
     };
 
     try {
-      const webhookRes = await fetch("/api/submit-lead", {
+      const res = await fetch("/api/submit-lead", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(payload),
       });
 
-      if (!webhookRes.ok) {
-        setStatus("error");
-        setErrorMessage(
-          webhookRes.status === 503
-            ? "Lead delivery is not configured. Please email us directly."
-            : "Something went wrong. Please try again or email us directly."
-        );
+      if (res.ok) {
+        router.push("/thank-you");
         return;
       }
 
-      // Soft-fail secondary contact path if present (do not cancel via navigation).
+      let message =
+        "Something went wrong. Please try again or email us directly.";
       try {
-        await fetch("/api/contact", {
-          method: "POST",
-          headers: { "Content-Type": "application/json" },
-          body: JSON.stringify(payload),
-          keepalive: true,
-        });
+        const errBody = (await res.json()) as {
+          message?: string;
+          error?: string;
+        };
+        if (errBody.message) message = errBody.message;
+        else if (res.status === 503) {
+          message =
+            "Form delivery is not configured on the server. Please email us directly.";
+        }
       } catch {
-        /* ignore — submit-lead already handled webhook + Sheets */
+        /* use default message */
       }
 
-      router.push("/thank-you");
+      setStatus("error");
+      setErrorMessage(message);
     } catch {
       setStatus("error");
-      setErrorMessage("Something went wrong. Please try again or email us directly.");
+      setErrorMessage("Network error. Please try again or email us directly.");
     }
   }
 

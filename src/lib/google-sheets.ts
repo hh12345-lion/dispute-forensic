@@ -7,16 +7,25 @@ function normalizePrivateKey(raw: string | undefined): string | undefined {
     (key.startsWith('"') && key.endsWith('"')) ||
     (key.startsWith("'") && key.endsWith("'"))
   ) {
-    key = key.slice(1, -1);
+    key = key.slice(1, -1).trim();
   }
-  return key.replace(/\\n/g, "\n");
+  // Netlify / .env often store PEM as one line with literal \n
+  key = key.replace(/\\n/g, "\n");
+  return key;
+}
+
+function normalizeEnv(value: string | undefined): string | undefined {
+  const trimmed = value?.trim();
+  return trimmed || undefined;
 }
 
 function getAuthClient() {
+  const clientEmail = normalizeEnv(process.env.GOOGLE_SERVICE_ACCOUNT_EMAIL);
+  const privateKey = normalizePrivateKey(process.env.GOOGLE_PRIVATE_KEY);
   return new google.auth.GoogleAuth({
     credentials: {
-      client_email: process.env.GOOGLE_SERVICE_ACCOUNT_EMAIL,
-      private_key: normalizePrivateKey(process.env.GOOGLE_PRIVATE_KEY),
+      client_email: clientEmail,
+      private_key: privateKey,
     },
     scopes: ["https://www.googleapis.com/auth/spreadsheets"],
   });
@@ -44,11 +53,31 @@ export interface ReadResult {
 }
 
 export function isGoogleSheetsConfigured(): boolean {
+  const email = normalizeEnv(process.env.GOOGLE_SERVICE_ACCOUNT_EMAIL);
+  const key = normalizePrivateKey(process.env.GOOGLE_PRIVATE_KEY);
+  const sheetId = normalizeEnv(process.env.GOOGLE_SHEET_ID);
+
   return Boolean(
-    process.env.GOOGLE_SERVICE_ACCOUNT_EMAIL &&
-      process.env.GOOGLE_PRIVATE_KEY &&
-      process.env.GOOGLE_SHEET_ID
+    email &&
+      key &&
+      key.includes("PRIVATE KEY") &&
+      sheetId
   );
+}
+
+export function getGoogleSheetsConfigHint(): string {
+  if (!normalizeEnv(process.env.GOOGLE_SERVICE_ACCOUNT_EMAIL)) {
+    return "GOOGLE_SERVICE_ACCOUNT_EMAIL is missing";
+  }
+  const key = normalizePrivateKey(process.env.GOOGLE_PRIVATE_KEY);
+  if (!key) return "GOOGLE_PRIVATE_KEY is missing";
+  if (!key.includes("PRIVATE KEY")) {
+    return "GOOGLE_PRIVATE_KEY does not look like a PEM key (check \\n newlines in Netlify)";
+  }
+  if (!normalizeEnv(process.env.GOOGLE_SHEET_ID)) {
+    return "GOOGLE_SHEET_ID is missing";
+  }
+  return "ok";
 }
 
 export async function appendRow(
@@ -60,12 +89,19 @@ export async function appendRow(
   }
 
   const sheets = getSheetsClient();
-  const spreadsheetId = target?.spreadsheetId || process.env.GOOGLE_SHEET_ID;
+  const spreadsheetId =
+    target?.spreadsheetId || normalizeEnv(process.env.GOOGLE_SHEET_ID);
   const sheetName =
-    target?.sheetName || process.env.GOOGLE_SHEET_TAB_NAME || "Sheet1";
+    target?.sheetName ||
+    normalizeEnv(process.env.GOOGLE_SHEET_TAB_NAME) ||
+    "Sheet1";
+
+  if (!spreadsheetId) {
+    throw new Error("Missing spreadsheet ID");
+  }
 
   const response = await sheets.spreadsheets.values.append({
-    spreadsheetId: spreadsheetId!,
+    spreadsheetId,
     range: `${sheetName}!A:A`,
     valueInputOption: "USER_ENTERED",
     insertDataOption: "INSERT_ROWS",

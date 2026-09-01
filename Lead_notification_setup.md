@@ -127,5 +127,5 @@ fetch("/api/submit-lead", {
 | **`BRAND_NAME`** | `DisputeForensic` |
 | **`domain`** (when `NEXT_PUBLIC_SITE_URL=https://www.disputeforensic.com`) | `disputeforensic.com` |
 | Contact webhook | Primary via **`/api/submit-lead`** on form submit |
-| Google Sheets | One shared tab (`GOOGLE_SHEET_TAB_NAME`) + **Form Type**; soft-fail after webhook |
+| Google Sheets | Same **`/api/submit-lead`** request; succeeds if webhook **or** Sheets works |
 | Contact form fields | Full name, email, phone (optional) |
