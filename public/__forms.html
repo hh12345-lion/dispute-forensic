@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <title>Form detection</title>
+  </head>
+  <body>
+    <!-- Static blueprint for Netlify form detection. Not linked in the UI. -->
+    <form name="contact" data-netlify="true" netlify-honeypot="bot-field" hidden>
+      <input type="hidden" name="form-name" value="contact" />
+      <input name="bot-field" />
+      <input type="text" name="name" />
+      <input type="email" name="email" />
+      <select name="phonePrefix">
+        <option value="+44">+44 UK</option>
+        <option value="+353">+353 IE</option>
+        <option value="+49">+49 DE</option>
+        <option value="+33">+33 FR</option>
+        <option value="+971">+971 UAE</option>
+        <option value="+65">+65 SG</option>
+        <option value="+61">+61 AU</option>
+        <option value="+1">+1</option>
+        <option value="+">Other</option>
+      </select>
+      <input type="tel" name="phone" />
+    </form>
+  </body>
+</html>

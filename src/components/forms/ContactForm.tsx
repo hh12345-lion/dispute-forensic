@@ -4,6 +4,7 @@ import { useState, FormEvent } from "react";
 import { useRouter } from "next/navigation";
 import { SiteEmailLink } from "@/components/SiteEmailLink";
 import { PhoneField, formatPhoneFromFormData } from "./PhoneField";
+import { submitNetlifyForm } from "@/lib/submitNetlifyForm";
 
 export function ContactForm() {
   const router = useRouter();
@@ -43,6 +44,17 @@ export function ContactForm() {
       });
 
       if (res.ok) {
+        try {
+          await submitNetlifyForm("contact", {
+            name: fullName,
+            email,
+            phonePrefix: String(data.get("phonePrefix") || "+44").trim(),
+            phone: String(data.get("phone") || "").trim(),
+          });
+        } catch {
+          // Netlify form is secondary; don't block the visitor.
+        }
+
         router.push("/thank-you");
         return;
       }
@@ -76,7 +88,20 @@ export function ContactForm() {
   const labelClass = "mb-1 block text-sm font-medium text-heading";
 
   return (
-    <form onSubmit={handleSubmit} className="min-w-0 space-y-5">
+    <form
+      name="contact"
+      method="POST"
+      action="/__forms.html"
+      onSubmit={handleSubmit}
+      className="min-w-0 space-y-5"
+    >
+      <input type="hidden" name="form-name" value="contact" />
+      <p className="hidden" aria-hidden="true">
+        <label>
+          Do not fill this out:{" "}
+          <input name="bot-field" tabIndex={-1} autoComplete="off" />
+        </label>
+      </p>
       <div className="grid grid-cols-1 gap-5 sm:grid-cols-2">
         <div className="min-w-0">
           <label htmlFor="name" className={labelClass}>
