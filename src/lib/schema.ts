@@ -39,6 +39,7 @@ export function articleSchema({
   datePublished = "2025-01-15",
   dateModified = "2025-05-26",
   aboutServiceId,
+  image,
 }: {
   headline: string;
   description: string;
@@ -46,6 +47,7 @@ export function articleSchema({
   datePublished?: string;
   dateModified?: string;
   aboutServiceId?: string;
+  image?: string;
 }): object {
   const schema: Record<string, unknown> = {
     "@context": "https://schema.org",
@@ -66,6 +68,10 @@ export function articleSchema({
       url: SITE_URL,
     },
   };
+
+  if (image) {
+    schema.image = image.startsWith("http") ? image : `${SITE_URL}${image}`;
+  }
 
   if (aboutServiceId) {
     schema.about = {

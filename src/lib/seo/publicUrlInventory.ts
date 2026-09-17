@@ -7,6 +7,7 @@
 import { CASE_TYPE_SLUGS } from "@/data/case-types";
 import { DISCIPLINE_SLUGS } from "@/data/disciplines";
 import { GUIDE_SLUGS } from "@/data/guides";
+import { blogSlugs } from "@/data/blog";
 import { SECTOR_SLUGS } from "@/data/sectors";
 
 export const CANONICAL_HOST =
@@ -28,6 +29,7 @@ export const APP_STATIC_PATHS = [
   "/qualifications",
   "/how-to-instruct",
   "/guides",
+  "/blog",
   "/experts",
   "/glossary",
   "/cookies",
@@ -67,6 +69,7 @@ export interface PublicUrlInventory {
     caseTypes: number;
     sectors: number;
     guides: number;
+    blogs: number;
     total: number;
   };
 }
@@ -76,6 +79,7 @@ export function buildPublicUrlInventory(): PublicUrlInventory {
   const caseTypePaths = CASE_TYPE_SLUGS.map((slug) => `/case-types/${slug}`);
   const sectorPaths = SECTOR_SLUGS.map((slug) => `/sectors/${slug}`);
   const guidePaths = GUIDE_SLUGS.map((slug) => `/guides/${slug}`);
+  const blogPaths = blogSlugs.map((slug) => `/blog/${slug}`);
 
   const staticPaths = [...APP_STATIC_PATHS];
   const dynamicPaths = [
@@ -83,6 +87,7 @@ export function buildPublicUrlInventory(): PublicUrlInventory {
     ...caseTypePaths,
     ...sectorPaths,
     ...guidePaths,
+    ...blogPaths,
   ];
 
   const excluded = new Set<string>(SITEMAP_EXCLUDED_PATHS);
@@ -99,6 +104,7 @@ export function buildPublicUrlInventory(): PublicUrlInventory {
       caseTypes: caseTypePaths.length,
       sectors: sectorPaths.length,
       guides: guidePaths.length,
+      blogs: blogPaths.length,
       total: allPaths.length,
     },
   };
@@ -113,7 +119,13 @@ export function toAbsoluteUrl(path: string): string {
 /** Heuristic changefreq per path (sitemaps.org). */
 export function getSitemapChangefreq(path: string): string {
   if (path === "/") return "weekly";
-  if (path === "/forensic-disciplines" || path === "/guides") return "weekly";
+  if (
+    path === "/forensic-disciplines" ||
+    path === "/guides" ||
+    path === "/blog"
+  ) {
+    return "weekly";
+  }
   return "monthly";
 }
 
@@ -130,10 +142,10 @@ export function getSitemapPriority(path: string): number {
     return 0.88;
   }
   if (path.startsWith("/case-types/")) return 0.88;
-  if (path === "/guides") return 0.87;
+  if (path === "/guides" || path === "/blog") return 0.87;
   if (path.startsWith("/sectors/")) return 0.86;
   if (path === "/experts") return 0.8;
-  if (path.startsWith("/guides/")) return 0.8;
+  if (path.startsWith("/guides/") || path.startsWith("/blog/")) return 0.8;
   if (path === "/glossary") return 0.75;
   if (path === "/cookies") return 0.65;
   return 0.7;

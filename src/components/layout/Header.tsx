@@ -9,6 +9,7 @@ const navLinks = [
   { href: "/case-types", label: "Case Types" },
   { href: "/sectors", label: "Sectors" },
   { href: "/guides", label: "Guides" },
+  { href: "/blog", label: "Blog" },
 ];
 
 export function Header() {

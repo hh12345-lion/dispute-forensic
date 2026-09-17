@@ -95,6 +95,7 @@ async function main() {
   console.log(`  Case types:   ${inventory.counts.caseTypes}`);
   console.log(`  Sectors:      ${inventory.counts.sectors}`);
   console.log(`  Guides:       ${inventory.counts.guides}`);
+  console.log(`  Blog posts:   ${inventory.counts.blogs}`);
   console.log(`Sitemap excluded: ${SITEMAP_EXCLUDED_PATHS.join(", ")}`);
   console.log(`Robots disallow:  ${ROBOTS_DISALLOW_PATHS.join(", ")}`);
   console.log("─".repeat(40));

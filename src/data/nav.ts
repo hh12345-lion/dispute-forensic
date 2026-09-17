@@ -35,6 +35,7 @@ export const navSectorLinks: NavLink[] = [
 
 export const navResourcesLinks: NavLink[] = [
   { href: "/guides", label: "Guides" },
+  { href: "/blog", label: "Blog" },
   { href: "/how-to-instruct", label: "How to Instruct" },
   { href: "/qualifications", label: "Qualifications" },
 ];
@@ -109,6 +110,7 @@ export const footerColumns: FooterColumn[] = [
     title: "Resources",
     links: [
       { href: "/guides", label: "Solicitor Guides" },
+      { href: "/blog", label: "Blog" },
       { href: "/glossary", label: "Glossary" },
       { href: "/how-to-instruct", label: "How to Instruct" },
       { href: "/forensic-disciplines", label: "Forensic Disciplines" },

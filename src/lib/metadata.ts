@@ -19,12 +19,14 @@ export function createMetadata({
   path = "",
   noindex = false,
   nofollow = false,
+  image,
 }: {
   title: string;
   description: string;
   path?: string;
   noindex?: boolean;
   nofollow?: boolean;
+  image?: string;
 }): Metadata {
   const robots =
     noindex || nofollow
@@ -33,6 +35,7 @@ export function createMetadata({
 
   const googleVerification = process.env.GOOGLE_SITE_VERIFICATION;
   const bingVerification = process.env.BING_SITE_VERIFICATION;
+  const pageUrl = `${SITE_URL}${path}`;
 
   return {
     title,
@@ -42,15 +45,19 @@ export function createMetadata({
     openGraph: {
       title,
       description,
-      url: `${SITE_URL}${path}`,
+      url: pageUrl,
       siteName: "DisputeForensic",
       locale: "en",
-      type: "website",
+      type: image ? "article" : "website",
+      ...(image
+        ? { images: [{ url: image, alt: title }] }
+        : {}),
     },
     twitter: {
       card: "summary_large_image",
       title,
       description,
+      ...(image ? { images: [image] } : {}),
     },
     robots,
     ...(googleVerification && {

@@ -21,6 +21,7 @@ const caseTypeChips = [
 
 const resourceLinks = [
   { href: "/guides", label: "Guides" },
+  { href: "/blog", label: "Blog" },
   { href: "/glossary", label: "Glossary" },
   { href: "/how-to-instruct", label: "How to Instruct" },
   { href: "/forensic-disciplines", label: "Disciplines overview" },

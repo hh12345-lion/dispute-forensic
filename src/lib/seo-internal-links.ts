@@ -49,6 +49,14 @@ const STANDARD_GUIDE_LINKS: Link[] = [
   CONTACT,
 ];
 
+const STANDARD_BLOG_LINKS: Link[] = [
+  { href: "/blog", label: "All Blog Posts" },
+  { href: "/guides", label: "Solicitor Guides" },
+  DISCIPLINES,
+  INSTRUCT,
+  CONTACT,
+];
+
 /** Per-discipline links, docs/SEO-ARCHITECTURE.md Rule 2 */
 const REQUIRED_DISCIPLINE_LINKS: Record<string, Link[]> = {
   "forensic-accounting": [
@@ -240,6 +248,7 @@ export const HOMEPAGE_SEO_LINKS: Link[] = [
   DISCIPLINES,
   { href: "/what-is-forensic-expert-witness", label: "What Is a Forensic Expert Witness?" },
   { href: "/guides", label: "Solicitor Guides" },
+  { href: "/blog", label: "Blog" },
   { href: "/case-types", label: "Case Types" },
   GLOSSARY,
   QUALIFICATIONS,
@@ -304,4 +313,8 @@ export function mergeGuideLinks(slug: string, pageLinks?: Link[]): Link[] {
     REQUIRED_GUIDE_LINKS[slug] ?? [],
     STANDARD_GUIDE_LINKS
   );
+}
+
+export function mergeBlogLinks(_slug: string, pageLinks?: Link[]): Link[] {
+  return mergeLinks(pageLinks, [], STANDARD_BLOG_LINKS);
 }
