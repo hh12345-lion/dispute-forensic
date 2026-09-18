@@ -10,6 +10,8 @@ export interface ContactLeadInput {
   email: string;
   phone: string;
   formType?: LeadFormType;
+  /** Free-text enquiry body — always sent to n8n as `message`. */
+  message?: string;
 }
 
 export interface LeadWebhookPayload {
@@ -18,6 +20,7 @@ export interface LeadWebhookPayload {
   "Phone Number": string;
   "Brand name": string;
   domain: string;
+  message: string;
 }
 
 export function getLeadWebhookUrl(): string | undefined {
@@ -43,11 +46,30 @@ export function parseContactLeadBody(body: unknown): ContactLeadInput | null {
   const formType: LeadFormType =
     formTypeRaw === "instruct" ? "instruct" : "contact";
 
+  const messageKeys = [
+    "message",
+    "Message",
+    "description",
+    "enquiry",
+    "details",
+    "summary",
+    "notes",
+    "matter",
+  ] as const;
+  let message = "";
+  for (const key of messageKeys) {
+    if (b[key] != null && String(b[key]).trim()) {
+      message = String(b[key]).trim();
+      break;
+    }
+  }
+
   return {
     fullName,
     email,
     phone: b.phone != null ? String(b.phone).trim() : "",
     formType,
+    message,
   };
 }
 
@@ -58,6 +80,7 @@ export function buildWebhookPayload(lead: ContactLeadInput): LeadWebhookPayload 
     "Phone Number": lead.phone,
     "Brand name": BRAND_NAME,
     domain: getSiteDomain(),
+    message: lead.message ?? "",
   };
 }
 
