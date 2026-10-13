@@ -39,6 +39,8 @@ function resolveLeadMessage(body) {
     "details",
     "summary",
     "notes",
+    "case_description",
+    "caseDescription",
     "matter",
     "caseSummary",
     "additionalInfo",

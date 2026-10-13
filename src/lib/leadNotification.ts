@@ -55,6 +55,9 @@ export function parseContactLeadBody(body: unknown): ContactLeadInput | null {
     "summary",
     "notes",
     "matter",
+    "caseDescription",
+    "case_description",
+    "caseBrief",
   ] as const;
   let message = "";
   for (const key of messageKeys) {

@@ -63,8 +63,7 @@ export default function ExpertsPage() {
           ))}
         </div>
         <p className="mx-auto mt-10 max-w-3xl text-center text-sm text-body/80">
-          Experts shown represent the calibre and credentials of specialists in
-          our multi-discipline network. Specific expert matching depends on
+          Specific expert matching depends on
           discipline, case type, sector, and availability.
         </p>
       </Section>

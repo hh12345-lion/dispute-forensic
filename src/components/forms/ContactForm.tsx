@@ -33,6 +33,7 @@ export function ContactForm() {
       fullName,
       email,
       phone: phone || "",
+      message: String(data.get("message") || "").trim(),
       formType: "contact" as const,
     };
 
@@ -50,6 +51,7 @@ export function ContactForm() {
             email,
             phonePrefix: String(data.get("phonePrefix") || "+44").trim(),
             phone: String(data.get("phone") || "").trim(),
+            message: payload.message,
           });
         } catch {
           // Netlify form is secondary; don't block the visitor.
@@ -132,6 +134,19 @@ export function ContactForm() {
       </div>
 
       <PhoneField inputClass={inputClass} labelClass={labelClass} />
+
+      <div className="min-w-0">
+        <label htmlFor="message" className={labelClass}>
+          How can we help?
+        </label>
+        <textarea
+          id="message"
+          name="message"
+          rows={4}
+          className={`${inputClass} resize-y`}
+          placeholder="Brief description of the dispute or forensic need."
+        />
+      </div>
 
       {status === "error" && (
         <p className="text-sm text-red-600" role="alert">
