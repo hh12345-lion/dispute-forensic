@@ -9,11 +9,11 @@ interface CTASectionProps {
 
 export function CTASection({
   title = "Need a forensic expert witness?",
-  description = "Tell us about your dispute and we will match you with the right specialist across accounting, engineering, digital forensics, or economics. Response within one business day.",
+  description = "Tell us about your dispute and we will match you with the right specialist across accounting, engineering, digital forensics, or economics.",
   buttonLabel = "Submit Enquiry",
 }: CTASectionProps) {
   return (
-    <section className="border-y border-border bg-primary py-12 sm:py-14 md:py-16">
+    <section className="border-y border-border bg-wine py-12 sm:py-14 md:py-16">
       <div className="mx-auto min-w-0 max-w-6xl px-4 sm:px-6 lg:px-8">
         <div className="mx-auto max-w-2xl text-center">
           <h2 className="font-serif text-xl font-semibold text-white sm:text-2xl md:text-3xl">

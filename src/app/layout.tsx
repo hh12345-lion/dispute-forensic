@@ -1,5 +1,5 @@
 import type { Metadata, Viewport } from "next";
-import { IBM_Plex_Sans, IBM_Plex_Serif } from "next/font/google";
+import localFont from "next/font/local";
 import { Header } from "@/components/layout/Header";
 import { Footer } from "@/components/layout/Footer";
 import { CookieConsentRoot } from "@/components/cookies/CookieConsentRoot";
@@ -7,17 +7,22 @@ import { ConsentDefaultsScript } from "@/components/cookies/ConsentDefaultsScrip
 import { createMetadata } from "@/lib/metadata";
 import "./globals.css";
 
-const plexSans = IBM_Plex_Sans({
-  subsets: ["latin"],
-  weight: ["400", "500", "600", "700"],
-  variable: "--font-plex-sans",
+export const dynamic = "force-dynamic";
+
+/** Body copy: Lora. */
+const lora = localFont({
+  src: [
+    { path: "./fonts/lora.woff2", weight: "400 700", style: "normal" },
+    { path: "./fonts/lora-italic-italic.woff2", weight: "400 700", style: "italic" },
+  ],
+  variable: "--font-body",
   display: "swap",
 });
 
-const plexSerif = IBM_Plex_Serif({
-  subsets: ["latin"],
-  weight: ["400", "600", "700"],
-  variable: "--font-plex-serif",
+/** Headings: Sora. */
+const sora = localFont({
+  src: [{ path: "./fonts/sora.woff2", weight: "300 800", style: "normal" }],
+  variable: "--font-heading",
   display: "swap",
 });
 
@@ -41,7 +46,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en" className={`${plexSans.variable} ${plexSerif.variable} h-full`}>
+    <html lang="en" className={`${lora.variable} ${sora.variable} h-full`}>
       <body className="flex min-h-full flex-col antialiased">
         <ConsentDefaultsScript />
         <CookieConsentRoot>

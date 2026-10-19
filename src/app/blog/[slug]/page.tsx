@@ -1,12 +1,8 @@
 import { notFound } from "next/navigation";
 import { createMetadata } from "@/lib/metadata";
 import { BlogPageTemplate } from "@/components/BlogPageTemplate";
-import { getBlogPost, blogSlugs } from "@/data/blog";
+import { getBlogPost } from "@/data/blog";
 import { mergeBlogLinks } from "@/lib/seo-internal-links";
-
-export function generateStaticParams() {
-  return blogSlugs.map((slug) => ({ slug }));
-}
 
 export async function generateMetadata({
   params,

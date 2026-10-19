@@ -10,7 +10,7 @@ import { SiteEmailLink } from "@/components/SiteEmailLink";
 export const metadata = createMetadata({
   title: "Instruct a Forensic Expert Witness | DisputeForensic.com",
   description:
-    "Submit your case details to be matched with the right forensic expert witness. Serving legal teams worldwide. Response within 1 business day.",
+    "Submit your case details to be matched with the right forensic expert witness. Serving legal teams worldwide.",
   path: "/contact",
 });
 
@@ -18,7 +18,6 @@ const trustPoints = [
   "All four forensic disciplines covered",
   "Domestic litigation and international arbitration",
   "Confidential enquiry handling",
-  "Response within one business day",
 ];
 
 export default function ContactPage() {
@@ -48,7 +47,7 @@ export default function ContactPage() {
               {trustPoints.map((point) => (
                 <li key={point} className="flex items-start gap-2 text-sm text-body">
                   <span className="mt-0.5 text-accent" aria-hidden>
-                    —
+                   , 
                   </span>
                   {point}
                 </li>

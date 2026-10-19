@@ -1,6 +1,9 @@
 import Link from "next/link";
 import { createMetadata } from "@/lib/metadata";
-import { PageHero } from "@/components/PageHero";
+import Image from "next/image";
+import { HomeHero } from "@/components/HomeHero";
+import { photoFor } from "@/lib/page-photos";
+import { photos } from "@/lib/photos";
 import { Section } from "@/components/Section";
 import { CTASection } from "@/components/CTASection";
 import { Card } from "@/components/Card";
@@ -32,7 +35,6 @@ const stats = [
   ["Expert witness services", "8", "Full dispute lifecycle"],
   ["Multi-discipline matching", "Yes", "Coordinated expert teams"],
   ["International forums", "ICC, LCIA, ICSID", "UNCITRAL and domestic courts"],
-  ["Response time", "1 business day", "Enquiry acknowledgement"],
 ];
 
 export default function HomePage() {
@@ -52,7 +54,7 @@ export default function HomePage() {
   return (
     <>
       <JsonLd data={homepageSchema} />
-      <PageHero
+      <HomeHero
         title="Forensic Expert Witness Services for Legal Teams Worldwide"
         subtitle="DisputeForensic.com is a multi-discipline forensic expert witness portal, connecting legal teams with qualified experts across forensic accounting, forensic engineering and quantum, digital forensics, and forensic economics."
       />
@@ -92,6 +94,7 @@ export default function HomePage() {
               title={d.title.replace(" Expert Witness UK", "")}
               description={d.paragraphs[0].slice(0, 140) + "…"}
               href={`/disciplines/${d.slug}`}
+              image={photoFor(`/disciplines/${d.slug}`) ?? undefined}
             />
           ))}
         </div>
@@ -112,6 +115,20 @@ export default function HomePage() {
           ))}
         </div>
       </Section>
+
+      <section aria-label="Sectors" className="bg-umber">
+        <div className="mx-auto grid max-w-6xl gap-3 px-4 py-10 sm:grid-cols-[2fr_1fr_1fr] sm:px-6 lg:px-8">
+          <div className="chamfer relative aspect-[21/9] bg-wine sm:aspect-auto sm:min-h-[12rem]">
+            <Image src={photos.refinery.src} alt={photos.refinery.alt} fill sizes="(max-width: 640px) 92vw, 600px" className="object-cover" />
+          </div>
+          <div className="chamfer relative aspect-[4/3] bg-wine">
+            <Image src={photos.constructionCrane.src} alt={photos.constructionCrane.alt} fill sizes="(max-width: 640px) 92vw, 300px" className="object-cover" />
+          </div>
+          <div className="chamfer relative aspect-[4/3] bg-wine">
+            <Image src={photos.serverRacks.src} alt={photos.serverRacks.alt} fill sizes="(max-width: 640px) 92vw, 300px" className="object-cover" />
+          </div>
+        </div>
+      </section>
 
       <Section alt>
         <h2 className="font-serif text-balance text-2xl font-semibold text-heading sm:text-3xl">
@@ -152,6 +169,8 @@ export default function HomePage() {
       </Section>
 
       <Section>
+        <div className="grid gap-10 lg:grid-cols-[minmax(0,1fr)_22rem] lg:items-start">
+        <div>
         <h2 className="font-serif text-balance text-2xl font-semibold text-heading sm:text-3xl">
           A Global Multi-Discipline Forensic Portal
         </h2>
@@ -177,6 +196,14 @@ export default function HomePage() {
           </Link>
         </p>
         <RelatedLinks links={HOMEPAGE_SEO_LINKS} title="Explore Further" />
+        </div>
+        <figure className="relative hidden lg:block">
+          <div aria-hidden="true" className="chamfer absolute inset-0 translate-x-3 translate-y-3 bg-copper" />
+          <div className="chamfer relative aspect-[4/5] bg-stone">
+            <Image src={photos.hearingRoom.src} alt={photos.hearingRoom.alt} fill sizes="352px" className="object-cover" />
+          </div>
+        </figure>
+        </div>
       </Section>
 
       <CTASection />

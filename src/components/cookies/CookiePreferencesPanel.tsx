@@ -64,7 +64,7 @@ export function CookiePreferencesPanel({ onClose }: CookiePreferencesPanelProps)
       >
         <div className="relative border-b border-border bg-gradient-to-r from-primary to-[#15194a] px-5 py-4 sm:px-6">
           <div
-            className="absolute inset-x-0 top-0 h-0.5 bg-gradient-to-r from-[#C5A572] via-accent to-[#C5A572]"
+            className="absolute inset-x-0 top-0 h-0.5 bg-gradient-to-r from-wine via-accent to-wine"
             aria-hidden
           />
           <div className="flex items-start justify-between gap-4 pt-1">

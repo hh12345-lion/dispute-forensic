@@ -14,7 +14,7 @@ import {
 /**
  * POST /api/submit-lead
  * Writes to Google Sheets when configured and POSTs the standard n8n webhook.
- * Succeeds if at least one path works — webhook failure must not block Sheets.
+ * Succeeds if at least one path works, webhook failure must not block Sheets.
  */
 export async function POST(request: Request) {
   let body: unknown;

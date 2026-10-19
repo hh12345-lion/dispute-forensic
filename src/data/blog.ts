@@ -517,7 +517,7 @@ export const blogPosts: BlogPost[] = [
     title: "How Forensic Experts Identify and Explain Assumptions in Expert Evidence",
     h1: "How Forensic Experts Identify and Explain Assumptions in Expert Evidence",
     metaTitle: "Assumptions in Expert Evidence | DisputeForensic Blog",
-    metaDescription: "How forensic experts identify and explain assumptions in expert evidence for litigation and arbitration — incomplete records, counterfactuals, sensitivity analysis, and clear reporting for legal teams.",
+    metaDescription: "How forensic experts identify and explain assumptions in expert evidence for litigation and arbitration, incomplete records, counterfactuals, sensitivity analysis, and clear reporting for legal teams.",
     datePublished: "2026-09-17",
     dateModified: "2026-09-17",
     lastReviewed: "September 2026",

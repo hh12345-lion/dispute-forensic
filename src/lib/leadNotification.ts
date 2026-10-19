@@ -1,6 +1,6 @@
 import { getSiteDomain } from "@/lib/seo";
 
-/** Outbound webhook JSON key `Brand name` — fixed per site for n8n routing. */
+/** Outbound webhook JSON key `Brand name`, fixed per site for n8n routing. */
 export const BRAND_NAME = "DisputeForensic";
 
 export type LeadFormType = "contact" | "instruct";
@@ -10,7 +10,7 @@ export interface ContactLeadInput {
   email: string;
   phone: string;
   formType?: LeadFormType;
-  /** Free-text enquiry body — always sent to n8n as `message`. */
+  /** Free-text enquiry body: always sent to n8n as `message`. */
   message?: string;
 }
 

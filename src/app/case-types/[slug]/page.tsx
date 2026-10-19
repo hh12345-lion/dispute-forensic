@@ -1,12 +1,8 @@
 import { notFound } from "next/navigation";
 import { createMetadata } from "@/lib/metadata";
 import { ContentPageTemplate } from "@/components/ContentPageTemplate";
-import { CASE_TYPE_SLUGS, getCaseType } from "@/data/case-types";
+import { getCaseType } from "@/data/case-types";
 import { mergeCaseTypeLinks } from "@/lib/seo-internal-links";
-
-export function generateStaticParams() {
-  return CASE_TYPE_SLUGS.map((slug) => ({ slug }));
-}
 
 export async function generateMetadata({
   params,

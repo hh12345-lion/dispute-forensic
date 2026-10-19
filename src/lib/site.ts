@@ -7,17 +7,17 @@ export const SITE_EMAIL = "contact@disputeforensic.com";
 
 /** Short copy for footers and intros: global reach, not tied to one jurisdiction. */
 export const SITE_SCOPE =
-  "DisputeForensic.com connects legal teams worldwide with forensic expert witnesses across accounting, engineering, digital forensics, and economics — for domestic litigation and international forums including ICC, LCIA, ICSID, and UNCITRAL.";
+  "DisputeForensic.com connects legal teams worldwide with forensic expert witnesses across accounting, engineering, digital forensics, and economics, for domestic litigation and international forums including ICC, LCIA, ICSID, and UNCITRAL.";
 export const LINKEDIN_URL =
   "https://www.linkedin.com/company/dispute-forensic";
 
 export const COLORS = {
-  primary: "#1C1917",
-  accent: "#0D9488",
-  highlight: "#78716C",
-  background: "#FAFAF9",
-  sectionAlt: "#F5F5F4",
-  border: "#D6D3D1",
-  heading: "#1C1917",
-  body: "#44403C",
+  primary: "#3B2F2C",
+  accent: "#AC4E1A",
+  highlight: "#7A6A63",
+  background: "#FBF9F5",
+  sectionAlt: "#F6F2EC",
+  border: "#D4CCC1",
+  heading: "#591E35",
+  body: "#3B2F2C",
 } as const;

@@ -21,7 +21,7 @@ const nextSteps = [
   },
   {
     title: "Response",
-    text: "You will hear from us within one business day at the email address you provided.",
+    text: "We will reply to the email address you provided.",
   },
   {
     title: "Instruction",

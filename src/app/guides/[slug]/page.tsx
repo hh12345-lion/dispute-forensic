@@ -1,12 +1,8 @@
 import { notFound } from "next/navigation";
 import { createMetadata } from "@/lib/metadata";
 import { GuidePageTemplate } from "@/components/GuidePageTemplate";
-import { GUIDE_SLUGS, getGuide } from "@/data/guides";
+import { getGuide } from "@/data/guides";
 import { mergeGuideLinks } from "@/lib/seo-internal-links";
-
-export function generateStaticParams() {
-  return GUIDE_SLUGS.map((slug) => ({ slug }));
-}
 
 export async function generateMetadata({
   params,

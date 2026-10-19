@@ -1,6 +1,9 @@
 import type { Metadata } from "next";
 import { SITE_URL } from "./site";
 
+/** Shared social image in public/brand/og.png. */
+const DEFAULT_OG_IMAGE = "/brand/og.png";
+
 /** Global English + x-default */
 export function buildHreflangAlternates(path: string = "") {
   const url = `${SITE_URL}${path}`;

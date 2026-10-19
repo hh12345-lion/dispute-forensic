@@ -1,186 +1,180 @@
 "use client";
 
 import Link from "next/link";
-import { useEffect, useState } from "react";
+import { usePathname } from "next/navigation";
+import {
+  navCaseTypeLinks,
+  navDisciplineLinks,
+  navResourcesLinks,
+  navSectorLinks,
+  navServiceLinks,
+} from "@/data/nav";
 
-const navLinks = [
-  { href: "/forensic-disciplines", label: "Disciplines" },
-  { href: "/services", label: "Services" },
-  { href: "/case-types", label: "Case Types" },
-  { href: "/sectors", label: "Sectors" },
-  { href: "/guides", label: "Guides" },
-  { href: "/blog", label: "Blog" },
+type Group = {
+  key: string;
+  label: string;
+  href: string;
+  items: { href: string; label: string }[];
+  prefixes: string[];
+};
+
+const groups: Group[] = [
+  {
+    key: "disciplines",
+    label: "Disciplines",
+    href: "/forensic-disciplines",
+    items: [{ href: "/forensic-disciplines", label: "Forensic Disciplines" }, ...navDisciplineLinks],
+    prefixes: ["/forensic-disciplines", "/disciplines"],
+  },
+  {
+    key: "services",
+    label: "Services",
+    href: "/services",
+    items: [{ href: "/services", label: "All Services" }, ...navServiceLinks],
+    prefixes: ["/services"],
+  },
+  { key: "case-types", label: "Case Types", href: "/case-types", items: navCaseTypeLinks, prefixes: ["/case-types"] },
+  { key: "sectors", label: "Sectors", href: "/sectors", items: navSectorLinks, prefixes: ["/sectors"] },
+  {
+    key: "resources",
+    label: "Resources",
+    href: "/guides",
+    items: [...navResourcesLinks, { href: "/glossary", label: "Glossary" }, { href: "/experts", label: "Our Experts" }],
+    prefixes: ["/guides", "/blog", "/how-to-instruct", "/qualifications", "/glossary", "/experts", "/what-is-forensic-expert-witness"],
+  },
 ];
 
+const isOn = (pathname: string, g: Group) => g.prefixes.some((p) => pathname === p || pathname.startsWith(p + "/"));
+
+/**
+ * Two-part masthead: a cream plate carrying the full-colour logo, its corner cut like the speech
+ * mark, joined to a burgundy bar with the section menus. The current section carries a copper
+ * rule. The mobile menu opens without JavaScript.
+ */
 export function Header() {
-  const [drawerOpen, setDrawerOpen] = useState(false);
-  const closeDrawer = () => setDrawerOpen(false);
-
-  useEffect(() => {
-    if (!drawerOpen) return;
-    const prev = document.body.style.overflow;
-    document.body.style.overflow = "hidden";
-    return () => {
-      document.body.style.overflow = prev;
-    };
-  }, [drawerOpen]);
-
-  useEffect(() => {
-    function onKey(e: KeyboardEvent) {
-      if (e.key === "Escape") setDrawerOpen(false);
-    }
-    if (drawerOpen) {
-      document.addEventListener("keydown", onKey);
-      return () => document.removeEventListener("keydown", onKey);
-    }
-  }, [drawerOpen]);
+  const pathname = usePathname() || "/";
 
   return (
-    <>
-      <header className="sticky top-0 z-50 bg-primary text-white">
-        <div className="mx-auto flex min-w-0 max-w-[90rem] items-stretch">
+    <header className="sticky top-0 z-50 shadow-[0_10px_30px_-22px_rgba(59,47,44,0.8)]">
+      <div className="relative bg-wine">
+        <input key={pathname} id="mobile-nav-toggle" type="checkbox" className="peer sr-only" aria-label="Open menu" />
+        <div className="mx-auto flex h-[72px] max-w-[90rem] items-stretch lg:h-[84px]">
           <Link
             href="/"
-            className="flex shrink-0 items-center gap-3 px-4 py-3 sm:px-5 lg:px-6"
-            onClick={closeDrawer}
-            aria-label="DisputeForensic home"
+            aria-label="Dispute Forensic home"
+            className="relative flex shrink-0 items-center bg-cream pl-4 pr-10 sm:pl-6 lg:pl-8 lg:pr-14"
+            style={{ clipPath: "polygon(0 0, 100% 0, 100% calc(100% - 26px), calc(100% - 26px) 100%, 0 100%)" }}
           >
-            <span
-              className="flex h-10 w-10 shrink-0 items-center justify-center bg-accent text-sm font-bold tracking-tighter text-white sm:h-11 sm:w-11 sm:text-base"
-              aria-hidden
-            >
-              DF
-            </span>
-            <span className="hidden min-w-0 flex-col leading-tight sm:flex">
-              <span className="font-serif text-base font-semibold tracking-tight">
-                DisputeForensic
-              </span>
-              <span className="text-[10px] uppercase tracking-[0.2em] text-white/45">
-                Expert witness portal
-              </span>
-            </span>
+            <img src="/brand/logo.svg" alt="Dispute Forensic" width={656} height={248} className="h-10 w-auto lg:h-12" />
           </Link>
 
-          <nav
-            className="hidden min-w-0 flex-1 items-stretch lg:flex"
-            aria-label="Main"
-          >
-            <ul className="flex min-w-0 flex-1 items-stretch">
-              {navLinks.map((link, i) => (
-                <li key={link.href} className="flex min-w-0 items-stretch">
-                  {i > 0 && (
-                    <span
-                      className="self-center text-white/15 select-none"
-                      aria-hidden
-                    >
-                      |
-                    </span>
-                  )}
+          <nav aria-label="Main" className="hidden min-w-0 flex-1 items-stretch justify-center xl:flex">
+            {groups.map((g) => {
+              const on = isOn(pathname, g);
+              return (
+                <div key={g.key} className="nav-item relative flex items-stretch">
                   <Link
-                    href={link.href}
-                    className="group relative flex min-h-[56px] items-center px-4 xl:px-5"
+                    href={g.href}
+                    aria-current={on ? "page" : undefined}
+                    className={`relative flex items-center gap-1.5 px-4 font-serif text-[0.92rem] font-semibold transition-colors ${
+                      on ? "text-white" : "text-cream/75 hover:text-white"
+                    }`}
                   >
-                    <span className="text-[11px] font-semibold uppercase tracking-[0.14em] text-white/65 transition-colors group-hover:text-white">
-                      {link.label}
-                    </span>
-                    <span
-                      className="absolute bottom-0 left-4 right-4 h-0.5 origin-left scale-x-0 bg-accent transition-transform group-hover:scale-x-100 xl:left-5 xl:right-5"
-                      aria-hidden
-                    />
+                    {g.label}
+                    <svg aria-hidden="true" viewBox="0 0 10 6" className="h-1.5 w-2.5 text-copper">
+                      <path d="M1 1l4 4 4-4" fill="none" stroke="currentColor" strokeWidth="1.8" />
+                    </svg>
+                    {on ? <span aria-hidden="true" className="absolute inset-x-4 bottom-0 h-1 bg-copper" /> : null}
                   </Link>
-                </li>
-              ))}
-            </ul>
+                  <div className="nav-panel absolute left-0 top-full z-50 w-[22rem] pt-0">
+                    <div className="chamfer-sm border-t-4 border-copper bg-white p-3 shadow-card">
+                      <ul className="grid gap-0.5">
+                        {g.items.map((item) => {
+                          const here = pathname === item.href;
+                          return (
+                            <li key={item.href}>
+                              <Link
+                                href={item.href}
+                                aria-current={here ? "page" : undefined}
+                                className={`flex items-center gap-2.5 px-3 py-2 text-sm transition-colors ${
+                                  here ? "bg-cream font-semibold text-heading" : "text-body hover:bg-cream hover:text-heading"
+                                }`}
+                              >
+                                <span aria-hidden="true" className={`h-2 w-2 shrink-0 rotate-45 ${here ? "bg-copper" : "bg-stone"}`} />
+                                {item.label}
+                              </Link>
+                            </li>
+                          );
+                        })}
+                      </ul>
+                    </div>
+                  </div>
+                </div>
+              );
+            })}
           </nav>
 
-          <div className="ml-auto flex items-stretch">
+          <div className="ml-auto flex items-center gap-2 pr-3 sm:pr-5 lg:pr-8">
             <Link
               href="/contact"
-              className="hidden min-h-[56px] items-center bg-accent px-6 text-[11px] font-bold uppercase tracking-[0.16em] text-white transition-colors hover:bg-accent-hover lg:inline-flex xl:px-8"
+              aria-current={pathname === "/contact" ? "page" : undefined}
+              className="chamfer-sm hidden bg-copper px-5 py-3 font-serif text-sm font-semibold text-white transition-colors hover:bg-accent-hover sm:inline-flex"
             >
-              Enquire
+              Instruct an Expert
             </Link>
-
-            <button
-              type="button"
-              className="inline-flex min-h-[56px] min-w-[56px] flex-col items-center justify-center gap-1 px-4 lg:hidden"
-              aria-expanded={drawerOpen}
-              aria-controls="nav-drawer"
-              aria-label={drawerOpen ? "Close navigation" : "Open navigation"}
-              onClick={() => setDrawerOpen((v) => !v)}
+            <label
+              htmlFor="mobile-nav-toggle"
+              className="menu-toggle inline-flex min-h-[44px] cursor-pointer items-center gap-2 px-3 font-serif text-sm font-semibold text-cream xl:hidden"
             >
-              <span
-                className={`block h-0.5 w-5 bg-white transition-transform ${drawerOpen ? "translate-y-[5px] rotate-45" : ""}`}
-              />
-              <span
-                className={`block h-0.5 w-5 bg-white transition-opacity ${drawerOpen ? "opacity-0" : ""}`}
-              />
-              <span
-                className={`block h-0.5 w-5 bg-white transition-transform ${drawerOpen ? "-translate-y-[5px] -rotate-45" : ""}`}
-              />
-            </button>
+              <span className="menu-icon" aria-hidden="true">
+                <span />
+                <span />
+                <span />
+              </span>
+              Menu
+            </label>
           </div>
         </div>
-      </header>
 
-      {drawerOpen && (
-        <>
-          <button
-            type="button"
-            className="fixed inset-0 z-[60] bg-primary/60 backdrop-blur-[2px] lg:hidden"
-            aria-label="Close navigation"
-            onClick={closeDrawer}
-          />
-          <aside
-            id="nav-drawer"
-            className="fixed inset-y-0 right-0 z-[70] flex w-[min(100%,20rem)] flex-col bg-primary shadow-[-8px_0_32px_rgba(0,0,0,0.35)] motion-safe:animate-[dfDrawerIn_240ms_ease-out] lg:hidden"
-          >
-            <div className="flex items-center justify-between border-b border-white/10 px-5 py-4">
-              <p className="text-[10px] font-bold uppercase tracking-[0.2em] text-white/50">
-                Navigation
-              </p>
-              <button
-                type="button"
-                className="text-xs uppercase tracking-wider text-white/60 hover:text-white"
-                onClick={closeDrawer}
-              >
-                Close
-              </button>
-            </div>
-
-            <nav className="flex-1 overflow-y-auto px-3 py-4" aria-label="Mobile">
-              <ol className="space-y-1">
-                {navLinks.map((link, i) => (
-                  <li key={link.href}>
-                    <Link
-                      href={link.href}
-                      className="flex min-h-[48px] items-center gap-4 px-3 transition-colors hover:bg-white/5"
-                      onClick={closeDrawer}
-                    >
-                      <span className="w-6 shrink-0 font-mono text-xs text-accent">
-                        {String(i + 1).padStart(2, "0")}
-                      </span>
-                      <span className="text-sm font-medium text-white/90">
-                        {link.label}
-                      </span>
-                    </Link>
-                  </li>
-                ))}
-              </ol>
-            </nav>
-
-            <div className="border-t border-white/10 p-4 pb-[max(1rem,env(safe-area-inset-bottom))]">
-              <Link
-                href="/contact"
-                className="flex min-h-[48px] items-center justify-center bg-accent text-xs font-bold uppercase tracking-[0.16em] text-white hover:bg-accent-hover"
-                onClick={closeDrawer}
-              >
-                Submit Enquiry
-              </Link>
-            </div>
-          </aside>
-        </>
-      )}
-    </>
+        <nav
+          aria-label="Mobile"
+          className="hidden max-h-[calc(100vh-72px)] overflow-y-auto border-t border-white/10 bg-wine px-4 pb-6 max-xl:peer-checked:block sm:px-6"
+        >
+          {groups.map((g) => {
+            const on = isOn(pathname, g);
+            return (
+              <details key={g.key} className="fold border-b border-white/10" open={on}>
+                <summary className="flex cursor-pointer items-center justify-between py-4 font-serif text-lg font-semibold text-cream">
+                  <span className="flex items-center gap-2.5">
+                    {on ? <span aria-hidden="true" className="h-2 w-2 rotate-45 bg-copper" /> : null}
+                    {g.label}
+                  </span>
+                  <span aria-hidden="true" className="fold-mark" />
+                </summary>
+                <ul className="grid gap-0.5 pb-4 pl-1">
+                  {g.items.map((item) => {
+                    const here = pathname === item.href;
+                    return (
+                      <li key={item.href}>
+                        <Link
+                          href={item.href}
+                          aria-current={here ? "page" : undefined}
+                          className={`block py-2 ${here ? "font-semibold text-white" : "text-cream/70"}`}
+                        >
+                          {item.label}
+                        </Link>
+                      </li>
+                    );
+                  })}
+                </ul>
+              </details>
+            );
+          })}
+          <Link href="/contact" className="chamfer-sm mt-6 flex justify-center bg-copper px-5 py-3.5 font-serif text-sm font-semibold text-white">
+            Instruct an Expert
+          </Link>
+        </nav>
+      </div>
+    </header>
   );
 }

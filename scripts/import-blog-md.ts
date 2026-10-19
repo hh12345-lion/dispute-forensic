@@ -113,7 +113,7 @@ const excerptBlock = blocks.find((b) => b.type === "p") as
 const excerpt = excerptBlock?.text ?? "";
 
 const metaDescription =
-  "How forensic experts identify and explain assumptions in expert evidence for litigation and arbitration — incomplete records, counterfactuals, sensitivity analysis, and clear reporting for legal teams.";
+  "How forensic experts identify and explain assumptions in expert evidence for litigation and arbitration, incomplete records, counterfactuals, sensitivity analysis, and clear reporting for legal teams.";
 
 const out = `import type { BlogPost } from "./types";
 

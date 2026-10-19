@@ -1,12 +1,8 @@
 import { notFound } from "next/navigation";
 import { createMetadata } from "@/lib/metadata";
 import { ContentPageTemplate } from "@/components/ContentPageTemplate";
-import { SECTOR_SLUGS, getSector } from "@/data/sectors";
+import { getSector } from "@/data/sectors";
 import { mergeSectorLinks } from "@/lib/seo-internal-links";
-
-export function generateStaticParams() {
-  return SECTOR_SLUGS.map((slug) => ({ slug }));
-}
 
 export async function generateMetadata({
   params,

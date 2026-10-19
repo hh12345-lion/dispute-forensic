@@ -54,11 +54,11 @@ const steps = [
 ];
 
 const timeline = [
-  ["Day 1–3", "Enquiry submitted", "Initial response within 1 business day"],
+  ["First step", "Enquiry submitted", "Initial review of the dispute and the evidence needed"],
   ["Week 1", "Discipline assessment", "Expert profile and fee estimate agreed"],
-  ["Week 1–2", "Instruction letter signed", "Documents provided and scope confirmed"],
-  ["Weeks 2–8", "Analysis and investigation", "Interim queries addressed"],
-  ["Weeks 4–12", "Draft expert report", "Comments incorporated"],
+  ["Weeks 1 to 2", "Instruction letter signed", "Documents provided and scope confirmed"],
+  ["Weeks 2 to 8", "Analysis and investigation", "Interim queries addressed"],
+  ["Weeks 4 to 12", "Draft expert report", "Comments incorporated"],
   ["Final", "Signed report exchanged", "Joint meeting and trial preparation"],
 ];
 
