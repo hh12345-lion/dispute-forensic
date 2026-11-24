@@ -20,8 +20,8 @@ const caseTypes: ContentPage[] = [
     slug: "commercial-fraud-financial-crime",
     title: "Commercial Fraud & Financial Crime",
     h1: "Commercial Fraud & Financial Crime Forensic Expert Witness UK",
-    metaTitle:
-      "Commercial Fraud & Financial Crime Forensic Expert Witness UK",
+    // Previously "Commercial Fraud & Financial Crime Forensic Expert Witness UK" (too long; it was cut mid-phrase in results).
+    metaTitle: "Commercial Fraud & Financial Crime Expert Witness",
     metaDescription:
       "Forensic expert witnesses for commercial fraud and financial crime in the UK, asset tracing, freezing injunctions, POCA proceedings, and civil fraud claims. Forensic accounting and digital forensics.",
     paragraphs: [
@@ -54,8 +54,8 @@ const caseTypes: ContentPage[] = [
     slug: "construction-engineering-disputes",
     title: "Construction & Engineering Disputes",
     h1: "Construction & Engineering Dispute Forensic Expert Witness UK",
-    metaTitle:
-      "Construction & Engineering Dispute Forensic Expert Witness UK",
+    // Previously "Construction & Engineering Dispute Forensic Expert Witness UK" (too long; it was cut mid-phrase in results).
+    metaTitle: "Construction & Engineering Dispute Expert Witness",
     metaDescription:
       "Forensic quantum, delay, and engineering expert witnesses for UK construction disputes, TCC proceedings, adjudication, and international construction arbitration under JCT, NEC, and FIDIC.",
     paragraphs: [

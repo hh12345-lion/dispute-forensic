@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import { fitDescription, fitTitle } from "@/lib/fit";
 import { SITE_URL } from "./site";
 
 /** Shared social image in public/brand/og.png. */
@@ -40,8 +41,12 @@ export function createMetadata({
   const bingVerification = process.env.BING_SITE_VERIFICATION;
   const pageUrl = `${SITE_URL}${path}`;
 
+  // "Page | Brand" when it fits in 60 characters, otherwise shortened at a natural break (never mid-word);
+  // absolute, so a layout template cannot add the brand a second time. Descriptions fitted to 110–155.
+  title = fitTitle(title, "fit");
+  description = fitDescription(description);
   return {
-    title,
+    title: { absolute: title },
     description,
     metadataBase: new URL(SITE_URL),
     alternates: buildHreflangAlternates(path),
@@ -52,15 +57,14 @@ export function createMetadata({
       siteName: "DisputeForensic",
       locale: "en",
       type: image ? "article" : "website",
-      ...(image
-        ? { images: [{ url: image, alt: title }] }
-        : {}),
+      // Fall back to the site share image (previously pages without their own image had none: 44 pages).
+      images: [image ? { url: image, alt: title } : { url: `${SITE_URL}${DEFAULT_OG_IMAGE}`, width: 1200, height: 630, alt: "DisputeForensic" }],
     },
     twitter: {
       card: "summary_large_image",
       title,
       description,
-      ...(image ? { images: [image] } : {}),
+      images: [image ?? `${SITE_URL}${DEFAULT_OG_IMAGE}`],
     },
     robots,
     ...(googleVerification && {
